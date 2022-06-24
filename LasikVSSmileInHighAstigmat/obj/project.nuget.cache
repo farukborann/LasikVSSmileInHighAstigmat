@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "nWkUCGCiDaNxCeXDPyPMkRWR+ER3gd2RgzkxOOqyy92eqwCIg1ogr3oElIDwprJ41XXMXgrkFYcbC01lcH4B4w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Boran\\Desktop\\Workspace\\LasikVSSmileInHighAstigmat\\LasikVSSmileInHighAstigmat\\LasikVSSmileInHighAstigmat.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Boran\\.nuget\\packages\\controlzex\\4.4.0\\controlzex.4.4.0.nupkg.sha512",
+    "C:\\Users\\Boran\\.nuget\\packages\\mahapps.metro\\2.4.9\\mahapps.metro.2.4.9.nupkg.sha512",
+    "C:\\Users\\Boran\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.19\\microsoft.xaml.behaviors.wpf.1.1.19.nupkg.sha512",
+    "C:\\Users\\Boran\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512"
+  ],
+  "logs": []
+}

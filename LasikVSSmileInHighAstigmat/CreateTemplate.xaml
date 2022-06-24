@@ -1,0 +1,176 @@
+﻿<Controls:MetroWindow x:Class="LasikVSSmileInHighAstigmat.CreateTemplate"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:local="clr-namespace:LasikVSSmileInHighAstigmat"
+        xmlns:local1="clr-namespace:LasikVSSmileInHighAstigmat.ViewModels"
+        mc:Ignorable="d"
+        Title="CreateTemplate" Height="500" Width="1050" ResizeMode="NoResize">
+
+    <Controls:MetroWindow.DataContext>
+        <local1:CreateTemplateViewModel />
+    </Controls:MetroWindow.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="225" />
+            <ColumnDefinition Width="600" />
+            <ColumnDefinition Width="225" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Margin="15" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ListView Grid.Row="1" x:Name="groupsListBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding dataTemplate.GroupNames}">
+                <ListView.View>
+                    <GridView ColumnHeaderToolTip="Authors">
+                        <GridViewColumn Header="" Width="200" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Width="150">
+                                        <TextBox x:Name="GroupNameTextBox" Margin="5" TextAlignment="Center" Text="{Binding Path=Name}" />
+                                        <TextBlock IsHitTestVisible="False" Text="Group Name" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,15,0" Foreground="DarkGray">
+                                            <TextBlock.Style>
+                                                <Style TargetType="{x:Type TextBlock}">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Text, ElementName=GroupNameTextBox}" Value="">
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <TextBlock Text="Groups" Margin="5"/>
+            <Button Content="Ekle" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,50,0" Command="{Binding AddGroupCommand}"/>
+            <Button Content="Sil" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,10,0" Command="{Binding DelGroupCommand}" CommandParameter="{Binding ElementName=groupsListBox, Path=SelectedIndex}"/>
+        </Grid>
+
+        <Grid Grid.Column="1" Margin="15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel>
+                        <TextBlock Text="Preop" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <CheckBox Content="Group" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Group}"/>
+                        <CheckBox Content="Side" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Side}"/>
+                        <CheckBox Content="Name Surname" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Name_Surname}"/>
+                        <CheckBox Content="Op. Date" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.OpDate}"/>
+                        <CheckBox Content="Sex" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Sex}" />
+                        <CheckBox Content="Age" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Age}" />
+                        <CheckBox Content="Intended Sphere" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.IntendedSphere}" />
+                        <CheckBox Content="Intended Cylinder" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.IntendedCylinder}" />
+                        <CheckBox Content="Intended Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.IntendedAxis}" />
+                        <CheckBox Content="Target Sphere" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.TargetSphere}" />
+                        <CheckBox Content="Target Cylinder" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.TargetCylinder}" />
+                        <CheckBox Content="Target Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.TargetAxis}" />
+                        <CheckBox Content="Incision Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.IncisionAxis}" />
+                        <CheckBox Content="Incision Size" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.IncisionSize}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                        <CheckBox Content="Preop Corneal Thickness" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Preop_CornealThickness}" />
+                        <CheckBox Content="Preop Step K" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Preop_StepK}" />
+                        <CheckBox Content="Preop Step K Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Preop_StepKAxis}" />
+                        <CheckBox Content="Preop Flat K" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Preop_FlatK}" />
+                        <CheckBox Content="Preop Flat K Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Preop_FlatKAxis}" />
+                        <CheckBox Content="Preop Manifest Sphere" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Preop_ManifestSphere}" />
+                        <CheckBox Content="Preop Manifest Cylinder" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Preop_ManifestCylinder}" />
+                        <CheckBox Content="Preop Manifest Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Preop_ManifestAxis}" />
+                        <CheckBox Content="Preop UDVA" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Preop_UDVA}" />
+                        <CheckBox Content="Preop CDVA" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Preop_CDVA}" />
+                    </StackPanel>
+                </Grid>
+
+
+                <Grid Grid.Column="1" Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Margin="15,0,0,0">
+                        <TextBlock Text="Postop" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                        <CheckBox Content="Postop Corneal Thickness" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Postop_CornealThickness}" />
+                        <CheckBox Content="Postop Step K" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Postop_StepK}" />
+                        <CheckBox Content="Postop Step K Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Postop_StepKAxis}" />
+                        <CheckBox Content="Postop Flat K" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Postop_FlatK}" />
+                        <CheckBox Content="Postop Flat K Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Postop_FlatKAxis}" />
+                        <CheckBox Content="Postop Manifest Sphere" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Postop_ManifestSphere}" />
+                        <CheckBox Content="Postop Manifest Cylinder" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Postop_ManifestCylinder}" />
+                        <CheckBox Content="Postop Manifest Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Postop_ManifestAxis}" />
+                        <CheckBox Content="Postop UDVA" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Postop_UDVA}" />
+                        <CheckBox Content="Postop CDVA" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Postop_CDVA}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Margin="15,0,0,0">
+                        <TextBlock Text="Visual Acuity Type" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                        <CheckBox Content="Decimal" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Decimal}"/>
+                        <CheckBox Content="Snellen" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Snellen}"/>
+                        <CheckBox Content="LogMar" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.LogMar}"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+
+            <Button Content="Oluştur" Grid.Row="1" Margin="10" Command="{Binding CreateCommand}" />
+        </Grid>
+
+        <Grid Grid.Column="2" Margin="15" VerticalAlignment="Stretch" HorizontalAlignment="Left">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ListView Grid.Row="1" x:Name="periotsListBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,-15,5,5" ItemsSource="{Binding dataTemplate.ControlMonths}">
+                <ListView.View>
+                    <GridView ColumnHeaderToolTip="Authors">
+                        <GridViewColumn Header="" Width="200" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Controls:NumericUpDown Value="{Binding Path=Month}" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left" Width="75" HideUpDownButtons="True"/>
+                                        <TextBlock Text=". Month" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80,0,0,0"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <TextBlock Text="Periots" Margin="5"/>
+            <Button Content="Ekle" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,50,0" Command="{Binding AddControlMonthCommand}"/>
+            <Button Content="Sil" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,10,0" Command="{Binding DelControlMonthCommand}" CommandParameter="{Binding ElementName=periotsListBox, Path=SelectedIndex}"/>
+        </Grid>
+    </Grid>
+    
+    
+</Controls:MetroWindow>

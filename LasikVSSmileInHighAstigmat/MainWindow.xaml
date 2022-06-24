@@ -1,0 +1,34 @@
+﻿<Controls:MetroWindow x:Class="LasikVSSmileInHighAstigmat.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d" x:Name="DetailsWindow"
+        xmlns:viewModelLocal="clr-namespace:LasikVSSmileInHighAstigmat.ViewModels"
+        Title="Lasik Vs Smile In High Astigmat" Height="450" Width="800">
+    <Controls:MetroWindow.DataContext>
+        <viewModelLocal:MainViewModel/>
+    </Controls:MetroWindow.DataContext>
+    
+    <Grid>
+        <Button Content="Excel Dosyası Seç" Margin="30,30,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="17" IsEnabled="{Binding ReverseIsLoading}" Command="{Binding OpenFileCommand}" />
+        <Button Content="Excel Dosyası Oluştur" Margin="0,30,30,0" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="17" Command="{Binding CreateExampleData}" />
+        <ListView x:Name="groupsListBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="30,100,30,30" ItemsSource="{Binding GroupsList}">
+            <ListView.View>
+                <GridView ColumnHeaderToolTip="Authors">
+                    <GridViewColumn Header="Grup Adı" Width="250" DisplayMemberBinding="{Binding Path=GroupName}" />
+                    <GridViewColumn Header="Periyot Sayısı" Width="170" DisplayMemberBinding="{Binding Path=PeriotCount}" />
+                    <GridViewColumn Header="Hasta Sayısı" Width="170" DisplayMemberBinding="{Binding Path=PatientCount}" />
+                    <GridViewColumn Header="" Width="150" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Sonuçları Göster" Margin="3" VerticalAlignment="Center" Command="{Binding DataContext.ShowDetailsCommand, ElementName=DetailsWindow}" CommandParameter="{Binding Path=.}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Controls:MetroWindow>
