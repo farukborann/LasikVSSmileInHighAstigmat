@@ -1,10 +1,11 @@
 ﻿using LasikVSSmileInHighAstigmat.MVVM;
-using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.Win32;
+using Spire.Xls;
+using System.Drawing;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System;
 
 namespace LasikVSSmileInHighAstigmat.ViewModels
 {
@@ -16,28 +17,28 @@ namespace LasikVSSmileInHighAstigmat.ViewModels
         public void AddControlMonth()
         {
             dataTemplate.ControlMonths.Add(new(1));
-        }        
-        
+        }
+
         public ICommand DelControlMonthCommand { get; set; }
         public void DelControlMonth(object selectedIndex)
         {
-            if(int.TryParse(selectedIndex.ToString(), out int index) && index > -1)
+            if (int.TryParse(selectedIndex.ToString(), out int index) && index > -1)
             {
                 dataTemplate.ControlMonths.RemoveAt(index);
             }
         }
-                
-        
+
+
         public ICommand AddGroupCommand { get; set; }
         public void AddGroup()
         {
             dataTemplate.GroupNames.Add(new(""));
-        }        
-        
+        }
+
         public ICommand DelGroupCommand { get; set; }
         public void DelGroup(object selectedIndex)
         {
-            if(int.TryParse(selectedIndex.ToString(), out int index) && index > -1)
+            if (int.TryParse(selectedIndex.ToString(), out int index) && index > -1)
             {
                 dataTemplate.GroupNames.RemoveAt(index);
             }
@@ -53,145 +54,129 @@ namespace LasikVSSmileInHighAstigmat.ViewModels
             {
                 var DosyaYolu = file.FileName;
                 var DosyaAdi = file.SafeFileName;
-                Excel.Application excelApp = new();
-                if (excelApp == null)
-                {
-                    MessageBox.Show("Excel yüklü değil.", "Hata!", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-                excelApp.DisplayAlerts = false;
 
                 await Task.Run(() =>
                 {
-                    Excel.Workbook excelBook = excelApp.Workbooks.Add();
+                    Workbook workBook = new Workbook();
+                    workBook.Worksheets.Clear();
+                    workBook.Worksheets.Add(dataTemplate.GroupNames[0].Name);
+                    Worksheet workSheet = workBook.Worksheets[0];
 
-                    var workSheet = (Excel.Worksheet)excelApp.ActiveSheet;
-                    workSheet.Cells.Locked = false;
-                    workSheet.Cells[2,1].Value = "Subj. No";
+                    workSheet.Range[2, 1].Value = "Subj. No";
                     int lastColumn = 2;
 
-                    if (dataTemplate.Group) { workSheet.Cells[2, lastColumn].Value = "Group"; lastColumn++; }
-                    if (dataTemplate.Side) { workSheet.Cells[2, lastColumn].Value = "Side"; lastColumn++; }
-                    if (dataTemplate.Name_Surname) { workSheet.Cells[2, lastColumn].Value = "Name Surename"; lastColumn++; }
-                    if (dataTemplate.OpDate) { workSheet.Cells[2, lastColumn].Value = "Op. Date"; lastColumn++; }
-                    if (dataTemplate.Sex) { workSheet.Cells[2, lastColumn].Value = "Sex"; lastColumn++; }
-                    if (dataTemplate.Age) { workSheet.Cells[2, lastColumn].Value = "Age"; lastColumn++; }
+                    if (dataTemplate.Group) { workSheet.Range[2, lastColumn].Value = "Group"; lastColumn++; }
+                    if (dataTemplate.Side) { workSheet.Range[2, lastColumn].Value = "Side"; lastColumn++; }
+                    if (dataTemplate.Name_Surname) { workSheet.Range[2, lastColumn].Value = "Name Surename"; lastColumn++; }
+                    if (dataTemplate.OpDate) { workSheet.Range[2, lastColumn].Value = "Op. Date"; lastColumn++; }
+                    if (dataTemplate.Sex) { workSheet.Range[2, lastColumn].Value = "Sex    "; lastColumn++; }
+                    if (dataTemplate.Age) { workSheet.Range[2, lastColumn].Value = "Age  "; lastColumn++; }
 
-                    if (dataTemplate.IntendedSphere) { workSheet.Cells[2, lastColumn].Value = "Intended Sphere"; lastColumn++; }
-                    if (dataTemplate.IntendedCylinder) { workSheet.Cells[2, lastColumn].Value = "Intended Cylinder"; lastColumn++; }
-                    if (dataTemplate.IntendedAxis) { workSheet.Cells[2, lastColumn].Value = "Intended Axis"; lastColumn++; }
-                    if (dataTemplate.TargetSphere) { workSheet.Cells[2, lastColumn].Value = "Target Sphere"; lastColumn++; }
-                    if (dataTemplate.TargetCylinder) { workSheet.Cells[2, lastColumn].Value = "Target Cylinder"; lastColumn++; }
-                    if (dataTemplate.TargetAxis) { workSheet.Cells[2, lastColumn].Value = "Target Axis"; lastColumn++; }
-                    if (dataTemplate.IncisionAxis) { workSheet.Cells[2, lastColumn].Value = "Incision Axis"; lastColumn++; }
-                    if (dataTemplate.IncisionSize) { workSheet.Cells[2, lastColumn].Value = "Incision Size"; lastColumn++; }
+                    if (dataTemplate.IntendedSphere) { workSheet.Range[2, lastColumn].Value = "Intended Sphere"; lastColumn++; }
+                    if (dataTemplate.IntendedCylinder) { workSheet.Range[2, lastColumn].Value = "Intended Cylinder"; lastColumn++; }
+                    if (dataTemplate.IntendedAxis) { workSheet.Range[2, lastColumn].Value = "Intended Axis"; lastColumn++; }
+                    if (dataTemplate.TargetSphere) { workSheet.Range[2, lastColumn].Value = "Target Sphere"; lastColumn++; }
+                    if (dataTemplate.TargetCylinder) { workSheet.Range[2, lastColumn].Value = "Target Cylinder"; lastColumn++; }
+                    if (dataTemplate.TargetAxis) { workSheet.Range[2, lastColumn].Value = "Target Axis"; lastColumn++; }
+                    if (dataTemplate.IncisionAxis) { workSheet.Range[2, lastColumn].Value = "Incision Axis"; lastColumn++; }
+                    if (dataTemplate.IncisionSize) { workSheet.Range[2, lastColumn].Value = "Incision Size"; lastColumn++; }
 
-                    workSheet.Range[workSheet.Cells[2, 1], workSheet.Cells[2, lastColumn - 1]].BorderAround(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick, Color:0x0000ff);
+                    workSheet.Range[2, 1, 2, lastColumn - 1].BorderAround(LineStyleType.Medium, ExcelColors.Red);
 
                     int PreopColCount = 0;
-                    if (dataTemplate.Preop_StepK) { workSheet.Cells[2, lastColumn].Value = "Step K"; lastColumn++; PreopColCount++; }
-                    if (dataTemplate.Preop_StepKAxis) { workSheet.Cells[2, lastColumn].Value = "Step K Axis"; lastColumn++; PreopColCount++; }
-                    if (dataTemplate.Preop_FlatK) { workSheet.Cells[2, lastColumn].Value = "Flat K"; lastColumn++; PreopColCount++; }
-                    if (dataTemplate.Preop_FlatKAxis) { workSheet.Cells[2, lastColumn].Value = "Flat K Axis"; lastColumn++; PreopColCount++; }
-                    if (dataTemplate.Preop_ManifestSphere) { workSheet.Cells[2, lastColumn].Value = "Manifest Sphere"; lastColumn++; PreopColCount++; }
-                    if (dataTemplate.Preop_ManifestCylinder) { workSheet.Cells[2, lastColumn].Value = "Manifest Cylinder"; lastColumn++; PreopColCount++; }
-                    if (dataTemplate.Preop_ManifestAxis) { workSheet.Cells[2, lastColumn].Value = "Manifest Axis"; lastColumn++; PreopColCount++; }
+                    if (dataTemplate.Preop_StepK) { workSheet.Range[2, lastColumn].Value = "Corneal Thickness"; lastColumn++; PreopColCount++; }
+                    if (dataTemplate.Preop_StepK) { workSheet.Range[2, lastColumn].Value = "Step K"; lastColumn++; PreopColCount++; }
+                    if (dataTemplate.Preop_StepKAxis) { workSheet.Range[2, lastColumn].Value = "Step K Axis"; lastColumn++; PreopColCount++; }
+                    if (dataTemplate.Preop_FlatK) { workSheet.Range[2, lastColumn].Value = "Flat K"; lastColumn++; PreopColCount++; }
+                    if (dataTemplate.Preop_FlatKAxis) { workSheet.Range[2, lastColumn].Value = "Flat K Axis"; lastColumn++; PreopColCount++; }
+                    if (dataTemplate.Preop_ManifestSphere) { workSheet.Range[2, lastColumn].Value = "Manifest Sphere"; lastColumn++; PreopColCount++; }
+                    if (dataTemplate.Preop_ManifestCylinder) { workSheet.Range[2, lastColumn].Value = "Manifest Cylinder"; lastColumn++; PreopColCount++; }
+                    if (dataTemplate.Preop_ManifestAxis) { workSheet.Range[2, lastColumn].Value = "Manifest Axis"; lastColumn++; PreopColCount++; }
                     if (dataTemplate.Preop_UDVA)
-                    { 
-                        if(dataTemplate.Decimal) { workSheet.Cells[2, lastColumn].Value = "UDVA Decimal"; lastColumn++; PreopColCount++; }
-                        if(dataTemplate.Snellen) { workSheet.Cells[2, lastColumn].Value = "UDVA Snellen"; lastColumn++; PreopColCount++; }
-                        if(dataTemplate.LogMar) { workSheet.Cells[2, lastColumn].Value = "UDVA LogMar"; lastColumn++; PreopColCount++; }
+                    {
+                        if (dataTemplate.Decimal) { workSheet.Range[2, lastColumn].Value = "UDVA Decimal"; lastColumn++; PreopColCount++; }
+                        if (dataTemplate.Snellen) { workSheet.Range[2, lastColumn].Value = "UDVA Snellen"; lastColumn++; PreopColCount++; }
+                        if (dataTemplate.LogMar) { workSheet.Range[2, lastColumn].Value = "UDVA LogMar"; lastColumn++; PreopColCount++; }
                     }
                     if (dataTemplate.Preop_CDVA)
                     {
-                        if (dataTemplate.Decimal) { workSheet.Cells[2, lastColumn].Value = "CDVA Decimal"; lastColumn++; PreopColCount++; }
-                        if (dataTemplate.Snellen) { workSheet.Cells[2, lastColumn].Value = "CDVA Snellen"; lastColumn++; PreopColCount++; }
-                        if (dataTemplate.LogMar) { workSheet.Cells[2, lastColumn].Value = "CDVA LogMar"; lastColumn++; PreopColCount++; }
+                        if (dataTemplate.Decimal) { workSheet.Range[2, lastColumn].Value = "CDVA Decimal"; lastColumn++; PreopColCount++; }
+                        if (dataTemplate.Snellen) { workSheet.Range[2, lastColumn].Value = "CDVA Snellen"; lastColumn++; PreopColCount++; }
+                        if (dataTemplate.LogMar) { workSheet.Range[2, lastColumn].Value = "CDVA LogMar"; lastColumn++; PreopColCount++; }
                     }
-                    if(PreopColCount > 0)
+                    if (PreopColCount > 0)
                     {
-                        workSheet.Cells[1, lastColumn - PreopColCount].Value = "Preop Corneal Tickness";
-                        workSheet.Range[workSheet.Cells[1, lastColumn - PreopColCount], workSheet.Cells[1, lastColumn-1]].Merge();
-                        workSheet.Range[workSheet.Cells[1, lastColumn - PreopColCount], workSheet.Cells[1, lastColumn-1]].VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
-                        workSheet.Range[workSheet.Cells[1, lastColumn - PreopColCount], workSheet.Cells[1, lastColumn - 1]].BorderAround(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick, Color: 0x0000ff);
-                        
-                        workSheet.Range[workSheet.Cells[2, lastColumn - PreopColCount], workSheet.Cells[2, lastColumn - 1]].BorderAround(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick, Color: 0x0000ff);
+                        workSheet.Range[1, lastColumn - PreopColCount].Value = "Preop Değerler";
+                        workSheet.Range[1, 2, 1, lastColumn - 1].Merge();
+                        workSheet.Range[1, 2, 1, lastColumn - 1].VerticalAlignment = VerticalAlignType.Center;
+                        workSheet.Range[1, 2, 1, lastColumn - 1].BorderAround(LineStyleType.Medium, ExcelColors.Red);
+
+                        workSheet.Range[2, 2, 200, 2].Borders[BordersLineType.EdgeLeft].LineStyle = LineStyleType.Medium;
+                        workSheet.Range[2, 2, 200, 2].Borders[BordersLineType.EdgeLeft].Color = Color.Red;
+
+                        workSheet.Range[2, lastColumn - PreopColCount, 2, lastColumn - 1].BorderAround(LineStyleType.Medium, ExcelColors.Red);
                     }
 
-                    for (int i=0; i<dataTemplate.ControlMonths.Count; i++)
+                    for (int i = 0; i < dataTemplate.ControlMonths.Count; i++)
                     {
                         int PostopColCount = 0;
-                        if (dataTemplate.Postop_StepK) { workSheet.Cells[2, lastColumn].Value = "Step K"; lastColumn++; PostopColCount++; }
-                        if (dataTemplate.Postop_StepKAxis) { workSheet.Cells[2, lastColumn].Value = "Step K Axis"; lastColumn++; PostopColCount++; }
-                        if (dataTemplate.Postop_FlatK) { workSheet.Cells[2, lastColumn].Value = "Flat K"; lastColumn++; PostopColCount++; }
-                        if (dataTemplate.Postop_FlatKAxis) { workSheet.Cells[2, lastColumn].Value = "Flat K Axis"; lastColumn++; PostopColCount++; }
-                        if (dataTemplate.Postop_ManifestSphere) { workSheet.Cells[2, lastColumn].Value = "Manifest Sphere"; lastColumn++; PostopColCount++; }
-                        if (dataTemplate.Postop_ManifestCylinder) { workSheet.Cells[2, lastColumn].Value = "Manifest Cylinder"; lastColumn++; PostopColCount++; }
-                        if (dataTemplate.Postop_ManifestAxis) { workSheet.Cells[2, lastColumn].Value = "Manifest Axis"; lastColumn++; PostopColCount++; }
+                        if (dataTemplate.Postop_StepK) { workSheet.Range[2, lastColumn].Value = "Corneal Thickness"; lastColumn++; PostopColCount++; }
+                        if (dataTemplate.Postop_StepK) { workSheet.Range[2, lastColumn].Value = "Step K"; lastColumn++; PostopColCount++; }
+                        if (dataTemplate.Postop_StepKAxis) { workSheet.Range[2, lastColumn].Value = "Step K Axis"; lastColumn++; PostopColCount++; }
+                        if (dataTemplate.Postop_FlatK) { workSheet.Range[2, lastColumn].Value = "Flat K"; lastColumn++; PostopColCount++; }
+                        if (dataTemplate.Postop_FlatKAxis) { workSheet.Range[2, lastColumn].Value = "Flat K Axis"; lastColumn++; PostopColCount++; }
+                        if (dataTemplate.Postop_ManifestSphere) { workSheet.Range[2, lastColumn].Value = "Manifest Sphere"; lastColumn++; PostopColCount++; }
+                        if (dataTemplate.Postop_ManifestCylinder) { workSheet.Range[2, lastColumn].Value = "Manifest Cylinder"; lastColumn++; PostopColCount++; }
+                        if (dataTemplate.Postop_ManifestAxis) { workSheet.Range[2, lastColumn].Value = "Manifest Axis"; lastColumn++; PostopColCount++; }
                         if (dataTemplate.Preop_UDVA)
                         {
-                            if (dataTemplate.Decimal) { workSheet.Cells[2, lastColumn].Value = "UDVA Decimal"; lastColumn++; PostopColCount++; }
-                            if (dataTemplate.Snellen) { workSheet.Cells[2, lastColumn].Value = "UDVA Snellen"; lastColumn++; PostopColCount++; }
-                            if (dataTemplate.LogMar) { workSheet.Cells[2, lastColumn].Value = "UDVA LogMar"; lastColumn++; PostopColCount++; }
+                            if (dataTemplate.Decimal) { workSheet.Range[2, lastColumn].Value = "UDVA Decimal"; lastColumn++; PostopColCount++; }
+                            if (dataTemplate.Snellen) { workSheet.Range[2, lastColumn].Value = "UDVA Snellen"; lastColumn++; PostopColCount++; }
+                            if (dataTemplate.LogMar) { workSheet.Range[2, lastColumn].Value = "UDVA LogMar"; lastColumn++; PostopColCount++; }
                         }
                         if (dataTemplate.Preop_CDVA)
                         {
-                            if (dataTemplate.Decimal) { workSheet.Cells[2, lastColumn].Value = "CDVA Decimal"; lastColumn++; PostopColCount++; }
-                            if (dataTemplate.Snellen) { workSheet.Cells[2, lastColumn].Value = "CDVA Snellen"; lastColumn++; PostopColCount++; }
-                            if (dataTemplate.LogMar) { workSheet.Cells[2, lastColumn].Value = "CDVA LogMar"; lastColumn++; PostopColCount++; }
+                            if (dataTemplate.Decimal) { workSheet.Range[2, lastColumn].Value = "CDVA Decimal"; lastColumn++; PostopColCount++; }
+                            if (dataTemplate.Snellen) { workSheet.Range[2, lastColumn].Value = "CDVA Snellen"; lastColumn++; PostopColCount++; }
+                            if (dataTemplate.LogMar) { workSheet.Range[2, lastColumn].Value = "CDVA LogMar"; lastColumn++; PostopColCount++; }
                         }
                         if (PostopColCount > 0)
                         {
-                            workSheet.Cells[1, lastColumn - PostopColCount].Value = $"Postop Corneal Tickness {dataTemplate.ControlMonths[i].Month}";
-                            workSheet.Range[workSheet.Cells[1, lastColumn - PostopColCount], workSheet.Cells[1, lastColumn - 1]].Merge();
-                            workSheet.Range[workSheet.Cells[1, lastColumn - PostopColCount], workSheet.Cells[1, lastColumn - 1]].VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
-                            workSheet.Range[workSheet.Cells[1, lastColumn - PostopColCount], workSheet.Cells[1, lastColumn - 1]].BorderAround(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick, Color: 0x0000ff);
+                            workSheet.Range[1, lastColumn - PostopColCount].Value = $"Postop Değerler - {dataTemplate.ControlMonths[i].Month}.mo";
+                            workSheet.Range[1, lastColumn - PostopColCount, 1, lastColumn - 1].Merge();
+                            workSheet.Range[1, lastColumn - PostopColCount, 1, lastColumn - 1].VerticalAlignment = VerticalAlignType.Center;
+                            workSheet.Range[1, lastColumn - PostopColCount, 1, lastColumn - 1].BorderAround(LineStyleType.Medium, ExcelColors.Red);
 
-                            workSheet.Range[workSheet.Cells[2, lastColumn - PostopColCount], workSheet.Cells[2, lastColumn - 1]].BorderAround(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick, Color: 0x0000ff);
+                            workSheet.Range[3, lastColumn - PostopColCount, 200, lastColumn - PostopColCount].Borders[BordersLineType.EdgeLeft].LineStyle = LineStyleType.Medium;
+                            workSheet.Range[3, lastColumn - PostopColCount, 200, lastColumn - PostopColCount].Borders[BordersLineType.EdgeLeft].Color = Color.Red;
+
+                            workSheet.Range[2, lastColumn - PostopColCount, 2, lastColumn - 1].BorderAround(LineStyleType.Medium, ExcelColors.Red);
                         }
                     }
 
-                    workSheet.Range[workSheet.Cells[1, 1], workSheet.Cells[1, lastColumn]].Locked = true;
-                    workSheet.Range[workSheet.Cells[2, 1], workSheet.Cells[2, lastColumn]].Locked = true;
+                    workSheet.Range[3, lastColumn - 1, 200, lastColumn - 1].Borders[BordersLineType.EdgeRight].LineStyle = LineStyleType.Medium;
+                    workSheet.Range[3, lastColumn - 1, 200, lastColumn - 1].Borders[BordersLineType.EdgeRight].Color = Color.Red;
 
-                    workSheet.Columns.AutoFit();
-                    workSheet.Rows.AutoFit();
+                    workSheet.Range.AutoFitColumns();
+                    workSheet.Range.AutoFitRows();
 
-                    foreach (var group in dataTemplate.GroupNames)
+                    workSheet.Range.Style.Locked = false;
+                    workSheet.Range[1, 1, 2, lastColumn].Style.Locked = true;
+                    workSheet.Protect("1634", SheetProtectionType.All);
+
+                    for (int i = 1; i < dataTemplate.GroupNames.Count; i++)
                     {
-                        workSheet.Copy(Type.Missing, excelBook.Worksheets[excelBook.Worksheets.Count]);
-                        excelBook.Worksheets[excelBook.Worksheets.Count].Name = group.Name;
-                        excelBook.Worksheets[excelBook.Worksheets.Count].Protect(8495, UserInterfaceOnly: true);
+                        workBook.Worksheets.AddCopy(0);
+                        workBook.Worksheets[^1].Name = dataTemplate.GroupNames[i].Name;
+                        workBook.Worksheets[^1].Protect("1634", SheetProtectionType.All);
                     }
 
-                    workSheet.Delete();
-                    //Created Data Pages Now Create Settings Page
-                    /*excelBook.Worksheets.Add(Type.Missing, excelBook.Worksheets[excelBook.Worksheets.Count]);
-                    workSheet = excelBook.Worksheets[excelBook.Worksheets.Count];
+                    FileStream file_stream = new(DosyaYolu, FileMode.Create);
+                    workBook.SaveToStream(file_stream, FileFormat.Version2007);
+                    file_stream.Close();
 
-                    lastColumn = 2;
-                    if (dataTemplate.Group) { workSheet.Cells[2, lastColumn].Value = nameof(dataTemplate.Group); lastColumn++; }
-                    if (dataTemplate.Side) { workSheet.Cells[2, lastColumn].Value = nameof(dataTemplate.Side); lastColumn++; }
-                    if (dataTemplate.Name_Surname) { workSheet.Cells[2, lastColumn].Value = nameof(dataTemplate.Name_Surname); lastColumn++; }
-                    if (dataTemplate.OpDate) { workSheet.Cells[2, lastColumn].Value = nameof(dataTemplate.OpDate); lastColumn++; }
-                    if (dataTemplate.Sex) { workSheet.Cells[2, lastColumn].Value = nameof(dataTemplate.Sex); lastColumn++; }
-                    if (dataTemplate.Age) { workSheet.Cells[2, lastColumn].Value = nameof(dataTemplate.Age); lastColumn++; }
-
-                    if (dataTemplate.IntendedSphere) { workSheet.Cells[2, lastColumn].Value = nameof(dataTemplate.IntendedSphere); lastColumn++; }
-                    if (dataTemplate.IntendedCylinder) { workSheet.Cells[2, lastColumn].Value = nameof(dataTemplate.IntendedCylinder); lastColumn++; }
-                    if (dataTemplate.IntendedAxis) { workSheet.Cells[2, lastColumn].Value = nameof(dataTemplate.IntendedAxis); lastColumn++; }
-                    if (dataTemplate.TargetSphere) { workSheet.Cells[2, lastColumn].Value = nameof(dataTemplate.TargetSphere); lastColumn++; }
-                    if (dataTemplate.TargetCylinder) { workSheet.Cells[2, lastColumn].Value = nameof(dataTemplate.TargetCylinder); lastColumn++; }
-                    if (dataTemplate.TargetAxis) { workSheet.Cells[2, lastColumn].Value = nameof(dataTemplate.TargetAxis); lastColumn++; }
-                    if (dataTemplate.IncisionAxis) { workSheet.Cells[2, lastColumn].Value = nameof(dataTemplate.IncisionAxis); lastColumn++; }
-                    if (dataTemplate.IncisionSize) { workSheet.Cells[2, lastColumn].Value = nameof(dataTemplate.IncisionSize); lastColumn++; }*/
-
-
-                    excelBook.SaveAs(DosyaYolu, Excel.XlFileFormat.xlWorkbookDefault);
-                    excelBook.Close(0);
-                    excelApp.Quit();
+                    MessageBox.Show("Dosya başarıyla oluşturuldu.");
                 });
-
             }
         }
 

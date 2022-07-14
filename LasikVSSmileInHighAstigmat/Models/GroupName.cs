@@ -8,8 +8,8 @@ namespace LasikVSSmileInHighAstigmat.Models
         public string Name
         {
             get { return name; }
-            set 
-            { 
+            set
+            {
                 name = value;
                 RaisePropertyChangedEvent(nameof(Name));
             }

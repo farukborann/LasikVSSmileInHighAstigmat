@@ -1,13 +1,12 @@
-﻿using Microsoft.Win32;
-using System.Collections.Generic;
-using System.Windows.Input;
+﻿using LasikVSSmileInHighAstigmat.Models;
 using LasikVSSmileInHighAstigmat.MVVM;
-using System.Collections.ObjectModel;
-using LasikVSSmileInHighAstigmat.Models;
-using System.Windows;
-using Excel = Microsoft.Office.Interop.Excel;
+using Microsoft.Win32;
+using Spire.Xls;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace LasikVSSmileInHighAstigmat.ViewModels
 {
@@ -17,8 +16,8 @@ namespace LasikVSSmileInHighAstigmat.ViewModels
         public ObservableCollection<Group> GroupsList
         {
             get { return groupsList; }
-            set 
-            { 
+            set
+            {
                 groupsList = value;
             }
         }
@@ -27,13 +26,13 @@ namespace LasikVSSmileInHighAstigmat.ViewModels
         public bool IsLoading
         {
             get { return isLoading; }
-            set 
-            { 
+            set
+            {
                 isLoading = value;
                 RaisePropertyChangedEvent(nameof(IsLoading));
                 RaisePropertyChangedEvent(nameof(ReverseIsLoading));
             }
-        }        
+        }
         public bool ReverseIsLoading
         {
             get { return !isLoading; }
@@ -41,7 +40,7 @@ namespace LasikVSSmileInHighAstigmat.ViewModels
 
         public ICommand OpenFileCommand { get; set; }
         public ICommand CreateExampleData { get; set; }
-        public ICommand ShowDetailsCommand { get; set; }
+        public ICommand CreateResultsCommand { get; set; }
 
         public async Task getData()
         {
@@ -52,171 +51,123 @@ namespace LasikVSSmileInHighAstigmat.ViewModels
             {
                 var DosyaYolu = file.FileName;
                 var DosyaAdi = file.SafeFileName;
-                Excel.Application excelApp = new();
-                if (excelApp == null)
+
+                Workbook workBook = new();
+                workBook.LoadFromFile(DosyaYolu);
+                Worksheet workSheet = workBook.Worksheets[0];
+
+                DataTemplate dataTemplate = DataTemplate.GetDataTemplate(workSheet);
+
+                for (int i = 0; i < workBook.Worksheets.Count; i++)
                 {
-                    MessageBox.Show("Excel yüklü değil.", "Hata!", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-
-                Excel.Workbook excelBook = excelApp.Workbooks.Open(DosyaYolu);
-                Excel.Worksheet _sheet = (Excel.Worksheet)excelBook.Worksheets[1]; //it's not zero-based list. First element index = 1
-
-                int lastCol = 2; // Start 2 couse first column always => SubjNo
-                Models.DataTemplate dataTemplate = new(true);
-                // set dataTemplate for read patients valus
-                while (_sheet.UsedRange.Cells[1, lastCol].Value2 == null || // first find "after preop" values
-                    ((!((string)_sheet.UsedRange.Cells[1, lastCol].Value2).StartsWith("Preop"))
-                    && (!((string)_sheet.UsedRange.Cells[1, lastCol].Value2).StartsWith("Postop"))))
-                {
-                    if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Group") { dataTemplate.Group = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Side") { dataTemplate.Side = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Name Surename") { dataTemplate.Name_Surname = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Op. Date") { dataTemplate.OpDate = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Sex") { dataTemplate.Sex = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Age") { dataTemplate.Age = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Intended Sphere") { dataTemplate.IntendedSphere = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Intended Cylinder") { dataTemplate.IntendedCylinder = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Intended Axis") { dataTemplate.IntendedAxis = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Target Sphere") { dataTemplate.TargetSphere = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Target Cylinder") { dataTemplate.TargetCylinder = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Target Axis") { dataTemplate.TargetAxis = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Incision Axis") { dataTemplate.IncisionAxis = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Incision Size") { dataTemplate.IncisionSize = true; }
-
-                    lastCol++;
-                }
-
-                while (_sheet.UsedRange.Cells[1, lastCol].Value2 == null || !((string)_sheet.UsedRange.Cells[1, lastCol].Value2).StartsWith("Postop")) // after find (if exist) preop values
-                {
-                    if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Step K") { dataTemplate.Preop_StepK = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Step K Axis") { dataTemplate.Preop_StepKAxis = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Flat K") { dataTemplate.Preop_FlatK = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Flat K Axis") { dataTemplate.Preop_FlatKAxis = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Manifest Sphere") { dataTemplate.Preop_ManifestSphere = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Manifest Cylinder") { dataTemplate.Preop_ManifestCylinder = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Manifest Axis") { dataTemplate.Preop_ManifestAxis = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "UDVA Decimal") { dataTemplate.Preop_UDVA = true; dataTemplate.Decimal = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "UDVA Snellen") { dataTemplate.Preop_UDVA = true; dataTemplate.Snellen = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "UDVA LogMar") { dataTemplate.Preop_UDVA = true; dataTemplate.LogMar = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "CDVA Decimal") { dataTemplate.Preop_CDVA = true; dataTemplate.Decimal = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "CDVA Snellen") { dataTemplate.Preop_CDVA = true; dataTemplate.Snellen = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "CDVA LogMar") { dataTemplate.Preop_CDVA = true; dataTemplate.LogMar = true; }
-
-                    lastCol++;
-                }
-
-                do // its do while couse lastCol shows "Postop bla bla" columns now.
-                {
-                    if (_sheet.UsedRange.Cells[2, lastCol].Value2 == null) break; // if "postop" column doesnt exist break while
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Step K") { dataTemplate.Postop_StepK = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Step K Axis") { dataTemplate.Postop_StepKAxis = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Flat K") { dataTemplate.Postop_FlatK = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Flat K Axis") { dataTemplate.Postop_FlatKAxis = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Manifest Sphere") { dataTemplate.Postop_ManifestSphere = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Manifest Cylinder") { dataTemplate.Postop_ManifestCylinder = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "Manifest Axis") { dataTemplate.Postop_ManifestAxis = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "UDVA Decimal") { dataTemplate.Postop_UDVA = true; dataTemplate.Decimal = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "UDVA Snellen") { dataTemplate.Postop_UDVA = true; dataTemplate.Snellen = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "UDVA LogMar") { dataTemplate.Postop_UDVA = true; dataTemplate.LogMar = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "CDVA Decimal") { dataTemplate.Postop_CDVA = true; dataTemplate.Decimal = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "CDVA Snellen") { dataTemplate.Postop_CDVA = true; dataTemplate.Snellen = true; }
-                    else if ((string)_sheet.UsedRange.Cells[2, lastCol].Value2 == "CDVA LogMar") { dataTemplate.Postop_CDVA = true; dataTemplate.LogMar = true; }
-
-                    lastCol++;
-                } while (_sheet.UsedRange.Cells[1, lastCol].Value2 == null || !((string)_sheet.UsedRange.Cells[1, lastCol].Value2).StartsWith("Postop"));
-
-                //now we haw dataTemplate for this file. We will read patients values
-                foreach (var sheet in excelBook.Worksheets)
-                {
-                    var workSheet = (Excel.Worksheet)sheet;
-                    var name = _sheet.Name;
-                    //var periot = (_sheet.UsedRange.Columns.Count - 17) / 11;
-                    //var patientCount = _sheet.UsedRange.Rows.Count - 1;
+                    workSheet = workBook.Worksheets[i];
 
                     List<Patient> patients = new();
+                    List<int> error_patients= new();
 
-                    await Task.Run(() => {
+                    await Task.Run(() =>
+                    {
                         IsLoading = true;
-                        for (int i=3; int.TryParse(_sheet.UsedRange.Cells[i, 1].Value2 == null ? "": _sheet.UsedRange.Cells[i, 1].Value2.ToString(), out int subjNo); i++)
+                        for (int i = 3; int.TryParse(workSheet.Range[i, 1].Value2 == null ? "" : workSheet.Range[i, 1].Value2.ToString(), out int subjNo); i++)
                         {
-                            Patient patient = new() { SubjNo = subjNo, Periots = new() };
-                            int lastColumn = 2;
-
-                            if (dataTemplate.Group) { patient.Group = (string?)workSheet.Cells[i, lastColumn].Value; lastColumn++; }
-                            if (dataTemplate.Side) { patient.Side = (string?)workSheet.Cells[i, lastColumn].Value; lastColumn++; }
-                            if (dataTemplate.Name_Surname) { patient.Name_Surename = (string?)workSheet.Cells[i, lastColumn].Value; lastColumn++; }
-                            if (dataTemplate.OpDate) { patient.OpDate = (string?)workSheet.Cells[i, lastColumn].Value; lastColumn++; }
-                            if (dataTemplate.Sex) { patient.Sex = (string?)workSheet.Cells[i, lastColumn].Value; lastColumn++; }
-                            if (dataTemplate.Age) { patient.Age = (short?)workSheet.Cells[i, lastColumn].Value; lastColumn++; }
-
-                            if (dataTemplate.IntendedSphere) { patient.IntendedSphere = (float?)workSheet.Cells[i, lastColumn].Value; lastColumn++; }
-                            if (dataTemplate.IntendedCylinder) { patient.IntendedCylinder = (float?)workSheet.Cells[i, lastColumn].Value; lastColumn++; }
-                            if (dataTemplate.IntendedAxis) { patient.IntendedAxis = (float?)workSheet.Cells[i, lastColumn].Value ; lastColumn++; }
-                            if (dataTemplate.TargetSphere) { patient.TargetSphere = (float?)workSheet.Cells[i, lastColumn].Value ; lastColumn++; }
-                            if (dataTemplate.TargetCylinder) { patient.TargetCylinder = (float?)workSheet.Cells[i, lastColumn].Value; lastColumn++; }
-                            if (dataTemplate.TargetAxis) { patient.TargetAxis = (float?)workSheet.Cells[i, lastColumn].Value; lastColumn++; }
-                            if (dataTemplate.IncisionAxis) { patient.IncisionAxis = (float?)workSheet.Cells[i, lastColumn].Value; lastColumn++; }
-                            if (dataTemplate.IncisionSize) { patient.IncisionSize = (float?)workSheet.Cells[i, lastColumn].Value; lastColumn++; }
-
-                            bool isExistPreop = false;
-                            CornealTickness PreOp = new();
-                            if (dataTemplate.Preop_StepK) { PreOp.StepK = (float?)workSheet.Cells[i, lastColumn].Value; lastColumn++; isExistPreop = true; }
-                            if (dataTemplate.Preop_StepKAxis) { PreOp.StepKAxis = (float?)workSheet.Cells[i, lastColumn].Value; lastColumn++; isExistPreop = true; }
-                            if (dataTemplate.Preop_FlatK) { PreOp.FlatK = (float?)workSheet.Cells[i, lastColumn].Value; lastColumn++; isExistPreop = true; }
-                            if (dataTemplate.Preop_FlatKAxis) { PreOp.FlatKAxis = (float?)workSheet.Cells[i, lastColumn].Value; lastColumn++; isExistPreop = true; }
-                            if (dataTemplate.Preop_ManifestSphere) { PreOp.ManifestSphere = (float?)workSheet.Cells[i, lastColumn].Value; lastColumn++; isExistPreop = true; }
-                            if (dataTemplate.Preop_ManifestCylinder) { PreOp.ManifestCylinder = (float?)workSheet.Cells[i, lastColumn].Value; lastColumn++; isExistPreop = true; }
-                            if (dataTemplate.Preop_ManifestAxis) { PreOp.ManifestAxis = (float?)workSheet.Cells[i, lastColumn].Value; lastColumn++; isExistPreop = true; }
-                            if (dataTemplate.Preop_UDVA)
+                            try
                             {
-                                if (dataTemplate.Decimal) { PreOp.UDVADecimal = (float?)workSheet.Cells[i, lastColumn].Value; lastColumn++; isExistPreop = true; }
-                                if (dataTemplate.Snellen) { PreOp.UDVASnellen = (string?)workSheet.Cells[i, lastColumn].Value; lastColumn++; isExistPreop = true; }
-                                if (dataTemplate.LogMar) { PreOp.UDVALogMar = (float?)workSheet.Cells[i, lastColumn].Value; lastColumn++; isExistPreop = true; }
-                            }
-                            if (dataTemplate.Preop_CDVA)
-                            {
-                                if (dataTemplate.Decimal) { PreOp.CDVADecimal = (float?)workSheet.Cells[i, lastColumn].Value; lastColumn++; isExistPreop = true; }
-                                if (dataTemplate.Snellen) { PreOp.CDVASnellen = (string?)workSheet.Cells[i, lastColumn].Value; lastColumn++; isExistPreop = true; }
-                                if (dataTemplate.LogMar) { PreOp.CDVALogMar = (float?)workSheet.Cells[i, lastColumn].Value; lastColumn++; isExistPreop = true; }
-                            }
-                            if (isExistPreop) patient.Periots.Add(PreOp);
+                                Patient patient = new() { SubjNo = subjNo, Periots = new() };
+                                int lastColumn = 2;
 
-                            for (;  lastColumn <= workSheet.UsedRange.Columns.Count; lastColumn++)
-                            {
-                                if (_sheet.UsedRange.Cells[1, lastColumn].Value2 != null && ((string)_sheet.UsedRange.Cells[1, lastColumn].Value2).StartsWith("Postop"))
+                                if (dataTemplate.Group) { patient.Group = Convert.ToString(workSheet.Range[i, lastColumn].Value2); lastColumn++; }
+                                if (dataTemplate.Side) { patient.Side = Convert.ToString(workSheet.Range[i, lastColumn].Value2); lastColumn++; }
+                                if (dataTemplate.Name_Surname) { patient.Name_Surename = Convert.ToString(workSheet.Range[i, lastColumn].Value2); lastColumn++; }
+                                if (dataTemplate.OpDate) { patient.OpDate = Convert.ToString(workSheet.Range[i, lastColumn].Value2); lastColumn++; }
+                                if (dataTemplate.Sex) { patient.Sex = Convert.ToString(workSheet.Range[i, lastColumn].Value2); lastColumn++; }
+                                if (dataTemplate.Age) { patient.Age = (short?)workSheet.Range[i, lastColumn].Value2; lastColumn++; }
+
+                                if (dataTemplate.IntendedSphere) { patient.IntendedSphere = Convert.ToSingle(workSheet.Range[i, lastColumn].Value2); lastColumn++; }
+                                if (dataTemplate.IntendedCylinder) { patient.IntendedCylinder = Convert.ToSingle(workSheet.Range[i, lastColumn].Value2); lastColumn++; }
+                                if (dataTemplate.IntendedAxis) { patient.IntendedAxis = Convert.ToSingle(workSheet.Range[i, lastColumn].Value2); lastColumn++; }
+                                if (dataTemplate.TargetSphere) { patient.TargetSphere = Convert.ToSingle(workSheet.Range[i, lastColumn].Value2); lastColumn++; }
+                                if (dataTemplate.TargetCylinder) { patient.TargetCylinder = Convert.ToSingle(workSheet.Range[i, lastColumn].Value2); lastColumn++; }
+                                if (dataTemplate.TargetAxis) { patient.TargetAxis = Convert.ToSingle(workSheet.Range[i, lastColumn].Value2); lastColumn++; }
+                                if (dataTemplate.IncisionAxis) { patient.IncisionAxis = Convert.ToSingle(workSheet.Range[i, lastColumn].Value2); lastColumn++; }
+                                if (dataTemplate.IncisionSize) { patient.IncisionSize = Convert.ToSingle(workSheet.Range[i, lastColumn].Value2); lastColumn++; }
+
+                                bool isExistPreop = false;
+                                Eval_Result PreOp = new();
+                                if (dataTemplate.Preop_CornealThickness) { PreOp.CornealThickness = Convert.ToSingle(workSheet.Range[i, lastColumn].Value2); lastColumn++; isExistPreop = true; }
+                                if (dataTemplate.Preop_StepK) { PreOp.StepK = Convert.ToSingle(workSheet.Range[i, lastColumn].Value2); lastColumn++; isExistPreop = true; }
+                                if (dataTemplate.Preop_StepKAxis) { PreOp.StepKAxis = Convert.ToSingle(workSheet.Range[i, lastColumn].Value2); lastColumn++; isExistPreop = true; }
+                                if (dataTemplate.Preop_FlatK) { PreOp.FlatK = Convert.ToSingle(workSheet.Range[i, lastColumn].Value2); lastColumn++; isExistPreop = true; }
+                                if (dataTemplate.Preop_FlatKAxis) { PreOp.FlatKAxis = Convert.ToSingle(workSheet.Range[i, lastColumn].Value2); lastColumn++; isExistPreop = true; }
+                                if (dataTemplate.Preop_ManifestSphere) { PreOp.ManifestSphere = Convert.ToSingle(workSheet.Range[i, lastColumn].Value2); lastColumn++; isExistPreop = true; }
+                                if (dataTemplate.Preop_ManifestCylinder) { PreOp.ManifestCylinder = Convert.ToSingle(workSheet.Range[i, lastColumn].Value2); lastColumn++; isExistPreop = true; }
+                                if (dataTemplate.Preop_ManifestAxis) { PreOp.ManifestAxis = Convert.ToSingle(workSheet.Range[i, lastColumn].Value2); lastColumn++; isExistPreop = true; }
+                                if (dataTemplate.Preop_UDVA)
                                 {
-                                    CornealTickness PostOp = new();
-                                    if (dataTemplate.Postop_StepK) { PostOp.StepK = (float?)workSheet.Cells[i, lastColumn].Value;  }
-                                    if (dataTemplate.Postop_StepKAxis) { PostOp.StepKAxis = (float?)workSheet.Cells[i, lastColumn].Value;  }
-                                    if (dataTemplate.Postop_FlatK) { PostOp.FlatK = (float?)workSheet.Cells[i, lastColumn].Value;  }
-                                    if (dataTemplate.Postop_FlatKAxis) { PostOp.FlatKAxis = (float?)workSheet.Cells[i, lastColumn].Value;  }
-                                    if (dataTemplate.Postop_ManifestSphere) { PostOp.ManifestSphere = (float?)workSheet.Cells[i, lastColumn].Value;  }
-                                    if (dataTemplate.Postop_ManifestCylinder) { PostOp.ManifestCylinder = (float?)workSheet.Cells[i, lastColumn].Value;  }
-                                    if (dataTemplate.Postop_ManifestAxis) { PostOp.ManifestAxis = (float?)workSheet.Cells[i, lastColumn].Value;  }
-                                    if (dataTemplate.Postop_UDVA)
-                                    {
-                                        if (dataTemplate.Decimal) { PostOp.UDVADecimal = (float?)workSheet.Cells[i, lastColumn].Value;  }
-                                        if (dataTemplate.Snellen) { PostOp.UDVASnellen = (string?)workSheet.Cells[i, lastColumn].Value;  }
-                                        if (dataTemplate.LogMar) { PostOp.UDVALogMar = (float?)workSheet.Cells[i, lastColumn].Value;  }
-                                    }
-                                    if (dataTemplate.Postop_CDVA)
-                                    {
-                                        if (dataTemplate.Decimal) { PostOp.CDVADecimal = (float?)workSheet.Cells[i, lastColumn].Value;  }
-                                        if (dataTemplate.Snellen) { PostOp.CDVASnellen = (string?)workSheet.Cells[i, lastColumn].Value;  }
-                                        if (dataTemplate.LogMar) { PostOp.CDVALogMar = (float?)workSheet.Cells[i, lastColumn].Value;  }
-                                    }
-                                    patient.Periots.Add(PostOp);
+                                    if (dataTemplate.Decimal) { PreOp.UDVA = DVA.FindDVA_Decimal(Math.Round(Convert.ToSingle(workSheet.Range[i, lastColumn].Value2), 1)); lastColumn++; isExistPreop = true; }
+                                    else if (dataTemplate.Snellen) { PreOp.UDVA = DVA.FindDVA_Snellen(Convert.ToString(workSheet.Range[i, lastColumn].Value2)); lastColumn++; isExistPreop = true; }
+                                    else if (dataTemplate.LogMar) { PreOp.UDVA = DVA.FindDVA_LogMar(Math.Round(Convert.ToSingle(workSheet.Range[i, lastColumn].Value2), 1)); lastColumn++; isExistPreop = true; }
                                 }
+                                if (dataTemplate.Preop_CDVA)
+                                {
+                                    if (dataTemplate.Decimal) { PreOp.CDVA = DVA.FindDVA_Decimal(Math.Round(Convert.ToSingle(workSheet.Range[i, lastColumn].Value2), 1)); lastColumn++; isExistPreop = true; }
+                                    else if (dataTemplate.Snellen) { PreOp.CDVA = DVA.FindDVA_Snellen(Convert.ToString(workSheet.Range[i, lastColumn].Value2)); lastColumn++; isExistPreop = true; }
+                                    else if (dataTemplate.LogMar) { PreOp.CDVA = DVA.FindDVA_LogMar(Math.Round(Convert.ToSingle(workSheet.Range[i, lastColumn].Value2), 1)); lastColumn++; isExistPreop = true; }
+                                }
+                                if (isExistPreop) patient.Periots.Add(PreOp);
+
+                                for (; lastColumn <= workSheet.Range.Columns.Length;)
+                                {
+                                    if (workSheet.Range[1, lastColumn].Value2 != null && ((string)workSheet.Range[1, lastColumn].Value2).StartsWith("Postop"))
+                                    {
+                                        Eval_Result PostOp = new();
+                                        if (dataTemplate.Postop_CornealThickness) { PostOp.CornealThickness = Convert.ToSingle(workSheet.Range[i, lastColumn].Value2); lastColumn++; }
+                                        if (dataTemplate.Postop_StepK) { PostOp.StepK = Convert.ToSingle(workSheet.Range[i, lastColumn].Value2); lastColumn++; }
+                                        if (dataTemplate.Postop_StepKAxis) { PostOp.StepKAxis = Convert.ToSingle(workSheet.Range[i, lastColumn].Value2); lastColumn++; }
+                                        if (dataTemplate.Postop_FlatK) { PostOp.FlatK = Convert.ToSingle(workSheet.Range[i, lastColumn].Value2); lastColumn++; }
+                                        if (dataTemplate.Postop_FlatKAxis) { PostOp.FlatKAxis = Convert.ToSingle(workSheet.Range[i, lastColumn].Value2); lastColumn++; }
+                                        if (dataTemplate.Postop_ManifestSphere) { PostOp.ManifestSphere = Convert.ToSingle(workSheet.Range[i, lastColumn].Value2); lastColumn++; }
+                                        if (dataTemplate.Postop_ManifestCylinder) { PostOp.ManifestCylinder = Convert.ToSingle(workSheet.Range[i, lastColumn].Value2); lastColumn++; }
+                                        if (dataTemplate.Postop_ManifestAxis) { PostOp.ManifestAxis = Convert.ToSingle(workSheet.Range[i, lastColumn].Value2); lastColumn++; }
+                                        if (dataTemplate.Postop_UDVA)
+                                        {
+                                            if (dataTemplate.Decimal) { PostOp.UDVA = DVA.FindDVA_Decimal(Math.Round(Convert.ToSingle(workSheet.Range[i, lastColumn].Value2), 1)); lastColumn++; isExistPreop = true; }
+                                            else if (dataTemplate.Snellen) { PostOp.UDVA = DVA.FindDVA_Snellen(Convert.ToString(workSheet.Range[i, lastColumn].Value2)); lastColumn++; isExistPreop = true; }
+                                            else if (dataTemplate.LogMar) { PostOp.UDVA = DVA.FindDVA_LogMar(Math.Round(Convert.ToSingle(workSheet.Range[i, lastColumn].Value2), 1)); lastColumn++; isExistPreop = true; }
+                                        }
+                                        if (dataTemplate.Postop_CDVA)
+                                        {
+                                            if (dataTemplate.Decimal) { PostOp.CDVA = DVA.FindDVA_Decimal(Math.Round(Convert.ToSingle(workSheet.Range[i, lastColumn].Value2), 1)); lastColumn++; isExistPreop = true; }
+                                            else if (dataTemplate.Snellen) { PostOp.CDVA = DVA.FindDVA_Snellen(Convert.ToString(workSheet.Range[i, lastColumn].Value2)); lastColumn++; isExistPreop = true; }
+                                            else if (dataTemplate.LogMar) { PostOp.CDVA = DVA.FindDVA_LogMar(Math.Round(Convert.ToSingle(workSheet.Range[i, lastColumn].Value2), 1)); lastColumn++; isExistPreop = true; }
+                                        }
+                                        patient.Periots.Add(PostOp);
+                                    }
+                                }
+                                patients.Add(patient);
                             }
-                            patients.Add(patient);
+                            catch (Exception)
+                            {
+                                error_patients.Add(subjNo);
+                            }
+                            
                         }
                         IsLoading = false;
                     });
 
-                    GroupsList.Add(new Group(name) { Patients = patients });
+                    //Get periot months
+                    List<int> periotMonths = new();
+                    for (int j = 2; j <= workSheet.Range.Columns.Length; j++)
+                    {
+                        if (((string)workSheet.Range[1, j].Value2).StartsWith("Postop"))
+                        {
+                            string month = workSheet.Range[1, j].Value2.ToString().Split(" ")[^1].Replace(".mo","");
+                            if (int.TryParse(month, out int _month)) periotMonths.Add(_month);
+                            else periotMonths.Add(-1);
+                        }
+                    }
+
+                    GroupsList.Add(new Group(workSheet.Name) { Patients = patients, PeriotMonths = periotMonths, Error_Patients = error_patients });
                 }
-                excelBook.Close();
             }
         }
 
@@ -226,17 +177,16 @@ namespace LasikVSSmileInHighAstigmat.ViewModels
             createTemplate.Show();
         }
 
-        public void showDetails(object o)
+        public void createResults(object o)
         {
-            Details details = new(new(o as Group));
-            details.Show();
+            new ResultTemplate(o as Group).FillAndExport();
         }
 
         public MainViewModel()
         {
             OpenFileCommand = new DelegateCommand(async (o) => await getData());
             CreateExampleData = new DelegateCommand((o) => createExampleData());
-            ShowDetailsCommand = new DelegateCommand((o) => showDetails(o));
+            CreateResultsCommand = new DelegateCommand((o) => createResults(o));
             GroupsList = new ObservableCollection<Group>();
         }
 

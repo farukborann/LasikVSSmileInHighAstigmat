@@ -8,13 +8,13 @@ namespace LasikVSSmileInHighAstigmat.Models
         public int Month
         {
             get { return month; }
-            set 
-            { 
+            set
+            {
                 month = value;
                 RaisePropertyChangedEvent(nameof(Month));
             }
         }
-        
+
         public ControlMonth(int _month)
         {
             Month = _month;

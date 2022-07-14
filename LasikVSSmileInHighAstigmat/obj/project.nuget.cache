@@ -1,12 +1,21 @@
 {
   "version": 2,
-  "dgSpecHash": "nWkUCGCiDaNxCeXDPyPMkRWR+ER3gd2RgzkxOOqyy92eqwCIg1ogr3oElIDwprJ41XXMXgrkFYcbC01lcH4B4w==",
+  "dgSpecHash": "efMHK6W8Ybhsof8VGO/Sy+84EniWO1qw67OvkTPY3EeH2YVv+Swa8tYxeTdPjXOeqpQ6cnDHqauYBylJGZjo4w==",
   "success": true,
   "projectFilePath": "C:\\Users\\Boran\\Desktop\\Workspace\\LasikVSSmileInHighAstigmat\\LasikVSSmileInHighAstigmat\\LasikVSSmileInHighAstigmat.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Boran\\.nuget\\packages\\controlzex\\4.4.0\\controlzex.4.4.0.nupkg.sha512",
+    "C:\\Users\\Boran\\.nuget\\packages\\freespire.xls\\12.2.0\\freespire.xls.12.2.0.nupkg.sha512",
     "C:\\Users\\Boran\\.nuget\\packages\\mahapps.metro\\2.4.9\\mahapps.metro.2.4.9.nupkg.sha512",
+    "C:\\Users\\Boran\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\Boran\\.nuget\\packages\\microsoft.xaml.behaviors.wpf\\1.1.19\\microsoft.xaml.behaviors.wpf.1.1.19.nupkg.sha512",
+    "C:\\Users\\Boran\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512",
+    "C:\\Users\\Boran\\.nuget\\packages\\system.formats.asn1\\6.0.0\\system.formats.asn1.6.0.0.nupkg.sha512",
+    "C:\\Users\\Boran\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\Boran\\.nuget\\packages\\system.security.accesscontrol\\6.0.0\\system.security.accesscontrol.6.0.0.nupkg.sha512",
+    "C:\\Users\\Boran\\.nuget\\packages\\system.security.cryptography.pkcs\\6.0.0\\system.security.cryptography.pkcs.6.0.0.nupkg.sha512",
+    "C:\\Users\\Boran\\.nuget\\packages\\system.security.cryptography.xml\\6.0.0\\system.security.cryptography.xml.6.0.0.nupkg.sha512",
+    "C:\\Users\\Boran\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512",
     "C:\\Users\\Boran\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512"
   ],
   "logs": []

@@ -133,9 +133,9 @@
 
                     <StackPanel Grid.Row="1" Margin="15,0,0,0">
                         <TextBlock Text="Visual Acuity Type" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                        <CheckBox Content="Decimal" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Decimal}"/>
-                        <CheckBox Content="Snellen" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Snellen}"/>
-                        <CheckBox Content="LogMar" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.LogMar}"/>
+                        <RadioButton Content="Decimal" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Decimal}"/>
+                        <RadioButton Content="Snellen" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Snellen}"/>
+                        <RadioButton Content="LogMar" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.LogMar}"/>
                     </StackPanel>
                 </Grid>
             </Grid>

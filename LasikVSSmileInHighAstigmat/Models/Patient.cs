@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-    
+
 namespace LasikVSSmileInHighAstigmat.Models
 {
     public class Patient
@@ -13,9 +13,9 @@ namespace LasikVSSmileInHighAstigmat.Models
         public string? Sex { get; set; }
         public short? Age { get; set; }
 
-        public float? TargetSphere { get; set; }
-        public float? TargetCylinder { get; set; }
-        public float? TargetAxis { get; set; }
+        public float? TargetSphere { get; set; } = 0;
+        public float? TargetCylinder { get; set; } = 0;
+        public float? TargetAxis { get; set; } = 0;
 
         public float? IntendedSphere { get; set; }
         public float? IntendedCylinder { get; set; }
@@ -24,9 +24,9 @@ namespace LasikVSSmileInHighAstigmat.Models
         public float? IncisionAxis { get; set; }
         public float? IncisionSize { get; set; }
 
-        public List<CornealTickness> Periots;
-        private CornealTickness PreOp { get { return Periots[0]; } }
-        private CornealTickness PostOp { get { return Periots[^1]; } }
+        public List<Eval_Result> Periots;
+        public Eval_Result PreOp { get { return Periots[0]; } }
+        public Eval_Result PostOp { get { return Periots[^1]; } }
 
         double Vertex = 12;
 

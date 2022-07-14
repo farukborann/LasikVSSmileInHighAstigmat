@@ -1,6 +1,4 @@
 C:\Users\Boran\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.csproj.AssemblyReference.cache
-C:\Users\Boran\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\Interop.Microsoft.Office.Interop.Excel.dll
-C:\Users\Boran\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.csproj.ResolveComReference.cache
 C:\Users\Boran\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\MainWindow.baml
 C:\Users\Boran\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\MainWindow.g.cs
 C:\Users\Boran\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\App.g.cs
@@ -33,3 +31,6 @@ C:\Users\Boran\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAs
 C:\Users\Boran\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat_Content.g.cs
 C:\Users\Boran\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\CreateTemplate.g.cs
 C:\Users\Boran\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\CreateTemplate.baml
+C:\Users\Boran\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\Spire.License.dll
+C:\Users\Boran\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\Spire.Pdf.dll
+C:\Users\Boran\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\Spire.XLS.dll

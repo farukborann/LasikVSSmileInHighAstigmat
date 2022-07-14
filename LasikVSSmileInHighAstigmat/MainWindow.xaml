@@ -17,13 +17,14 @@
         <ListView x:Name="groupsListBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="30,100,30,30" ItemsSource="{Binding GroupsList}">
             <ListView.View>
                 <GridView ColumnHeaderToolTip="Authors">
-                    <GridViewColumn Header="Grup Adı" Width="250" DisplayMemberBinding="{Binding Path=GroupName}" />
-                    <GridViewColumn Header="Periyot Sayısı" Width="170" DisplayMemberBinding="{Binding Path=PeriotCount}" />
-                    <GridViewColumn Header="Hasta Sayısı" Width="170" DisplayMemberBinding="{Binding Path=PatientCount}" />
-                    <GridViewColumn Header="" Width="150" >
+                    <GridViewColumn Header="Grup Adı" Width="215" DisplayMemberBinding="{Binding Path=GroupName}" />
+                    <GridViewColumn Header="Periyot Sayısı" Width="100" DisplayMemberBinding="{Binding Path=PeriotCount}" />
+                    <GridViewColumn Header="Hasta Sayısı" Width="100" DisplayMemberBinding="{Binding Path=PatientCount}" />
+                    <GridViewColumn Header="Hatalı Hasta Sayısı" Width="150" DisplayMemberBinding="{Binding Path=ErrorPatientCount}" />
+                    <GridViewColumn Header="" Width="175" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Sonuçları Göster" Margin="3" VerticalAlignment="Center" Command="{Binding DataContext.ShowDetailsCommand, ElementName=DetailsWindow}" CommandParameter="{Binding Path=.}"/>
+                                <Button Content="Sonuçları Dışarı Aktar" Margin="3" VerticalAlignment="Center" Command="{Binding DataContext.CreateResultsCommand, ElementName=DetailsWindow}" CommandParameter="{Binding Path=.}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
