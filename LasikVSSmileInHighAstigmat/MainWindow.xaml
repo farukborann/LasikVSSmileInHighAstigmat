@@ -6,30 +6,110 @@
         xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d" x:Name="DetailsWindow"
         xmlns:viewModelLocal="clr-namespace:LasikVSSmileInHighAstigmat.ViewModels"
-        Title="Lasik Vs Smile In High Astigmat" Height="450" Width="800">
+        Title="Lasik Vs Smile In High Astigmat" Height="500" Width="1000" ResizeMode="NoResize">
     <Controls:MetroWindow.DataContext>
         <viewModelLocal:MainViewModel/>
     </Controls:MetroWindow.DataContext>
     
     <Grid>
-        <Button Content="Excel Dosyası Seç" Margin="30,30,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="17" IsEnabled="{Binding ReverseIsLoading}" Command="{Binding OpenFileCommand}" />
-        <Button Content="Excel Dosyası Oluştur" Margin="0,30,30,0" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="17" Command="{Binding CreateExampleData}" />
-        <ListView x:Name="groupsListBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="30,100,30,30" ItemsSource="{Binding GroupsList}">
-            <ListView.View>
-                <GridView ColumnHeaderToolTip="Authors">
-                    <GridViewColumn Header="Grup Adı" Width="215" DisplayMemberBinding="{Binding Path=GroupName}" />
-                    <GridViewColumn Header="Periyot Sayısı" Width="100" DisplayMemberBinding="{Binding Path=PeriotCount}" />
-                    <GridViewColumn Header="Hasta Sayısı" Width="100" DisplayMemberBinding="{Binding Path=PatientCount}" />
-                    <GridViewColumn Header="Hatalı Hasta Sayısı" Width="150" DisplayMemberBinding="{Binding Path=ErrorPatientCount}" />
-                    <GridViewColumn Header="" Width="175" >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Sonuçları Dışarı Aktar" Margin="3" VerticalAlignment="Center" Command="{Binding DataContext.CreateResultsCommand, ElementName=DetailsWindow}" CommandParameter="{Binding Path=.}"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <TextBlock TextWrapping="Wrap" Width="350" HorizontalAlignment="Left" Margin="30,30,0,125" FontSize="14">
+            <TextBlock FontWeight="Bold">Oluşturulacak Grafikler :</TextBlock><LineBreak/><LineBreak/>
+            1. Vektörel analiz tabloları: TIA, SIA, DV, CI<LineBreak/>
+            2. Efficacy<LineBreak/>
+            3. UDVA vs CDVA<LineBreak/>
+            4. Safety (Change in CDVA)<LineBreak/>
+            5. Attempted vs Achieved Spherical Equivalent Refraction<LineBreak/>
+            6. Accuracy of Spherical Equivalent Refraction<LineBreak/>
+            7. Stability of Spherical Equivalent Refraction<LineBreak/>
+            8. Amplitude of Astigmatism<LineBreak/>
+            9. TIA vs SIA<LineBreak/>
+            10. Angle of Error<LineBreak/>
+        </TextBlock>
+        
+        <TextBlock TextWrapping="Wrap" Width="350" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="30,0,0,25" FontSize="14">
+            <TextBlock FontWeight="Bold">Oluşturulacak Tablolar :</TextBlock><LineBreak/><LineBreak/>
+            1. Preop Data detayları ve eğer iki grubunuz varsa ve bunların "p" değeri ile karşılaştırılması<LineBreak/>
+            2. Postop Data detayları ve eğer iki grubunuz varsa ve bunların "p" değeri ile karşılaştırılması<LineBreak/>
+            3. Vektörel Analiz Datası detayları ve eğer iki grubunuz varsa ve bunların "p" değeri ile karşılaştırılması<LineBreak/>
+        </TextBlock>
+
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Width="500" Height="275">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Margin="15" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <ListView Grid.Row="1" x:Name="groupsListBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding DefaultTemplateCreator.DataTemplate.GroupNames}">
+                    <ListView.View>
+                        <GridView ColumnHeaderToolTip="Authors">
+                            <GridViewColumn Header="" Width="200" >
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Width="150">
+                                            <TextBox x:Name="GroupNameTextBox" Margin="5" TextAlignment="Center" Text="{Binding Path=Name}" />
+                                            <TextBlock IsHitTestVisible="False" Text="Group Name" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,15,0" Foreground="DarkGray">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="{x:Type TextBlock}">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Text, ElementName=GroupNameTextBox}" Value="">
+                                                                <Setter Property="Visibility" Value="Visible"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </Grid>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <TextBlock Text="Groups" Margin="5"/>
+                <Button Content="Ekle" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,50,0" Command="{Binding DefaultTemplateCreator.AddGroupCommand}"/>
+                <Button Content="Sil" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,10,0" Command="{Binding DefaultTemplateCreator.DelGroupCommand}" CommandParameter="{Binding ElementName=groupsListBox, Path=SelectedIndex}"/>
+            </Grid>
+
+            <Grid Grid.Column="1" Margin="15" VerticalAlignment="Stretch" HorizontalAlignment="Left">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <ListView Grid.Row="1" x:Name="periotsListBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,0,5,5" ItemsSource="{Binding DefaultTemplateCreator.DataTemplate.ControlMonths}">
+                    <ListView.View>
+                        <GridView ColumnHeaderToolTip="Authors">
+                            <GridViewColumn Header="" Width="200" >
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Controls:NumericUpDown Value="{Binding Path=Month}" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left" Width="75" HideUpDownButtons="True"/>
+                                            <TextBlock Text=". Month" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80,0,0,0"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <TextBlock Text="Periots" Margin="5"/>
+                <Button Content="Ekle" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,50,0" Command="{Binding DefaultTemplateCreator.AddControlMonthCommand}"/>
+                <Button Content="Sil" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,10,0" Command="{Binding DefaultTemplateCreator.DelControlMonthCommand}" CommandParameter="{Binding ElementName=periotsListBox, Path=SelectedIndex}"/>
+            </Grid>
+        </Grid>
+        
+        <Button Content="Excel Şablonu Oluştur" Margin="30,0,30,140" VerticalAlignment="Bottom" Width="400" Height="50" HorizontalAlignment="Right" FontSize="19" Command="{Binding CreateExampleDefaultDataCommand}" />
+        <Button Content="Gelişmiş Ayarlarla Excel Şablonu Oluştur" Margin="0,0,100,100" VerticalAlignment="Bottom" Width="250" Height="35" HorizontalAlignment="Right" FontSize="10" Command="{Binding CreateExampleDataCommand}" />
+        <Button Content="Excel Şablonu Analiz Et" Margin="30,0,30,25" VerticalAlignment="Bottom" Width="400" Height="50" HorizontalAlignment="Right" FontSize="17" Command="{Binding OpenFileCommand}" />
+
     </Grid>
 </Controls:MetroWindow>

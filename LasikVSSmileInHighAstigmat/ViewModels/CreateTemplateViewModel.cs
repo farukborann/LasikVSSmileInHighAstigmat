@@ -11,12 +11,12 @@ namespace LasikVSSmileInHighAstigmat.ViewModels
 {
     public class CreateTemplateViewModel
     {
-        public Models.DataTemplate dataTemplate { get; set; }
+        public Models.DataTemplate DataTemplate { get; set; }
 
         public ICommand AddControlMonthCommand { get; set; }
         public void AddControlMonth()
         {
-            dataTemplate.ControlMonths.Add(new(1));
+            DataTemplate.ControlMonths.Add(new(DataTemplate.ControlMonths.Count > 0 ? DataTemplate.ControlMonths[^1].Month + 1 : 1));
         }
 
         public ICommand DelControlMonthCommand { get; set; }
@@ -24,7 +24,7 @@ namespace LasikVSSmileInHighAstigmat.ViewModels
         {
             if (int.TryParse(selectedIndex.ToString(), out int index) && index > -1)
             {
-                dataTemplate.ControlMonths.RemoveAt(index);
+                DataTemplate.ControlMonths.RemoveAt(index);
             }
         }
 
@@ -32,7 +32,7 @@ namespace LasikVSSmileInHighAstigmat.ViewModels
         public ICommand AddGroupCommand { get; set; }
         public void AddGroup()
         {
-            dataTemplate.GroupNames.Add(new(""));
+            DataTemplate.GroupNames.Add(new("Group " + (DataTemplate.GroupNames.Count + 1).ToString()));
         }
 
         public ICommand DelGroupCommand { get; set; }
@@ -40,15 +40,17 @@ namespace LasikVSSmileInHighAstigmat.ViewModels
         {
             if (int.TryParse(selectedIndex.ToString(), out int index) && index > -1)
             {
-                dataTemplate.GroupNames.RemoveAt(index);
+                DataTemplate.GroupNames.RemoveAt(index);
             }
         }
 
         public ICommand CreateCommand { get; set; }
         public async Task Create()
         {
-            SaveFileDialog file = new();
-            file.Filter = "Excel Dosyaları (*.xlsx)|*.xlsx";
+            SaveFileDialog file = new()
+            {
+                Filter = "Excel Dosyaları (*.xlsx)|*.xlsx"
+            };
 
             if (file.ShowDialog() == true)
             {
@@ -59,50 +61,50 @@ namespace LasikVSSmileInHighAstigmat.ViewModels
                 {
                     Workbook workBook = new Workbook();
                     workBook.Worksheets.Clear();
-                    workBook.Worksheets.Add(dataTemplate.GroupNames[0].Name);
+                    workBook.Worksheets.Add(DataTemplate.GroupNames[0].Name);
                     Worksheet workSheet = workBook.Worksheets[0];
 
                     workSheet.Range[2, 1].Value = "Subj. No";
                     int lastColumn = 2;
 
-                    if (dataTemplate.Group) { workSheet.Range[2, lastColumn].Value = "Group"; lastColumn++; }
-                    if (dataTemplate.Side) { workSheet.Range[2, lastColumn].Value = "Side"; lastColumn++; }
-                    if (dataTemplate.Name_Surname) { workSheet.Range[2, lastColumn].Value = "Name Surename"; lastColumn++; }
-                    if (dataTemplate.OpDate) { workSheet.Range[2, lastColumn].Value = "Op. Date"; lastColumn++; }
-                    if (dataTemplate.Sex) { workSheet.Range[2, lastColumn].Value = "Sex    "; lastColumn++; }
-                    if (dataTemplate.Age) { workSheet.Range[2, lastColumn].Value = "Age  "; lastColumn++; }
+                    if (DataTemplate.Group) { workSheet.Range[2, lastColumn].Value = "Group"; lastColumn++; }
+                    if (DataTemplate.Side) { workSheet.Range[2, lastColumn].Value = "Side"; lastColumn++; }
+                    if (DataTemplate.Name_Surname) { workSheet.Range[2, lastColumn].Value = "Name Surename"; lastColumn++; }
+                    if (DataTemplate.OpDate) { workSheet.Range[2, lastColumn].Value = "Op. Date"; lastColumn++; }
+                    if (DataTemplate.Sex) { workSheet.Range[2, lastColumn].Value = "Sex    "; lastColumn++; }
+                    if (DataTemplate.Age) { workSheet.Range[2, lastColumn].Value = "Age  "; lastColumn++; }
 
-                    if (dataTemplate.IntendedSphere) { workSheet.Range[2, lastColumn].Value = "Intended Sphere"; lastColumn++; }
-                    if (dataTemplate.IntendedCylinder) { workSheet.Range[2, lastColumn].Value = "Intended Cylinder"; lastColumn++; }
-                    if (dataTemplate.IntendedAxis) { workSheet.Range[2, lastColumn].Value = "Intended Axis"; lastColumn++; }
-                    if (dataTemplate.TargetSphere) { workSheet.Range[2, lastColumn].Value = "Target Sphere"; lastColumn++; }
-                    if (dataTemplate.TargetCylinder) { workSheet.Range[2, lastColumn].Value = "Target Cylinder"; lastColumn++; }
-                    if (dataTemplate.TargetAxis) { workSheet.Range[2, lastColumn].Value = "Target Axis"; lastColumn++; }
-                    if (dataTemplate.IncisionAxis) { workSheet.Range[2, lastColumn].Value = "Incision Axis"; lastColumn++; }
-                    if (dataTemplate.IncisionSize) { workSheet.Range[2, lastColumn].Value = "Incision Size"; lastColumn++; }
+                    if (DataTemplate.IntendedSphere) { workSheet.Range[2, lastColumn].Value = "Intended Sphere"; lastColumn++; }
+                    if (DataTemplate.IntendedCylinder) { workSheet.Range[2, lastColumn].Value = "Intended Cylinder"; lastColumn++; }
+                    if (DataTemplate.IntendedAxis) { workSheet.Range[2, lastColumn].Value = "Intended Axis"; lastColumn++; }
+                    if (DataTemplate.TargetSphere) { workSheet.Range[2, lastColumn].Value = "Target Sphere"; lastColumn++; }
+                    if (DataTemplate.TargetCylinder) { workSheet.Range[2, lastColumn].Value = "Target Cylinder"; lastColumn++; }
+                    if (DataTemplate.TargetAxis) { workSheet.Range[2, lastColumn].Value = "Target Axis"; lastColumn++; }
+                    if (DataTemplate.IncisionAxis) { workSheet.Range[2, lastColumn].Value = "Incision Axis"; lastColumn++; }
+                    if (DataTemplate.IncisionSize) { workSheet.Range[2, lastColumn].Value = "Incision Size"; lastColumn++; }
 
                     workSheet.Range[2, 1, 2, lastColumn - 1].BorderAround(LineStyleType.Medium, ExcelColors.Red);
 
                     int PreopColCount = 0;
-                    if (dataTemplate.Preop_StepK) { workSheet.Range[2, lastColumn].Value = "Corneal Thickness"; lastColumn++; PreopColCount++; }
-                    if (dataTemplate.Preop_StepK) { workSheet.Range[2, lastColumn].Value = "Step K"; lastColumn++; PreopColCount++; }
-                    if (dataTemplate.Preop_StepKAxis) { workSheet.Range[2, lastColumn].Value = "Step K Axis"; lastColumn++; PreopColCount++; }
-                    if (dataTemplate.Preop_FlatK) { workSheet.Range[2, lastColumn].Value = "Flat K"; lastColumn++; PreopColCount++; }
-                    if (dataTemplate.Preop_FlatKAxis) { workSheet.Range[2, lastColumn].Value = "Flat K Axis"; lastColumn++; PreopColCount++; }
-                    if (dataTemplate.Preop_ManifestSphere) { workSheet.Range[2, lastColumn].Value = "Manifest Sphere"; lastColumn++; PreopColCount++; }
-                    if (dataTemplate.Preop_ManifestCylinder) { workSheet.Range[2, lastColumn].Value = "Manifest Cylinder"; lastColumn++; PreopColCount++; }
-                    if (dataTemplate.Preop_ManifestAxis) { workSheet.Range[2, lastColumn].Value = "Manifest Axis"; lastColumn++; PreopColCount++; }
-                    if (dataTemplate.Preop_UDVA)
+                    if (DataTemplate.Preop_StepK) { workSheet.Range[2, lastColumn].Value = "Corneal Thickness"; lastColumn++; PreopColCount++; }
+                    if (DataTemplate.Preop_StepK) { workSheet.Range[2, lastColumn].Value = "Step K"; lastColumn++; PreopColCount++; }
+                    if (DataTemplate.Preop_StepKAxis) { workSheet.Range[2, lastColumn].Value = "Step K Axis"; lastColumn++; PreopColCount++; }
+                    if (DataTemplate.Preop_FlatK) { workSheet.Range[2, lastColumn].Value = "Flat K"; lastColumn++; PreopColCount++; }
+                    if (DataTemplate.Preop_FlatKAxis) { workSheet.Range[2, lastColumn].Value = "Flat K Axis"; lastColumn++; PreopColCount++; }
+                    if (DataTemplate.Preop_ManifestSphere) { workSheet.Range[2, lastColumn].Value = "Manifest Sphere"; lastColumn++; PreopColCount++; }
+                    if (DataTemplate.Preop_ManifestCylinder) { workSheet.Range[2, lastColumn].Value = "Manifest Cylinder"; lastColumn++; PreopColCount++; }
+                    if (DataTemplate.Preop_ManifestAxis) { workSheet.Range[2, lastColumn].Value = "Manifest Axis"; lastColumn++; PreopColCount++; }
+                    if (DataTemplate.Preop_UDVA)
                     {
-                        if (dataTemplate.Decimal) { workSheet.Range[2, lastColumn].Value = "UDVA Decimal"; lastColumn++; PreopColCount++; }
-                        if (dataTemplate.Snellen) { workSheet.Range[2, lastColumn].Value = "UDVA Snellen"; lastColumn++; PreopColCount++; }
-                        if (dataTemplate.LogMar) { workSheet.Range[2, lastColumn].Value = "UDVA LogMar"; lastColumn++; PreopColCount++; }
+                        if (DataTemplate.Decimal) { workSheet.Range[2, lastColumn].Value = "UDVA Decimal"; lastColumn++; PreopColCount++; }
+                        if (DataTemplate.Snellen) { workSheet.Range[2, lastColumn].Value = "UDVA Snellen"; lastColumn++; PreopColCount++; }
+                        if (DataTemplate.LogMar) { workSheet.Range[2, lastColumn].Value = "UDVA LogMar"; lastColumn++; PreopColCount++; }
                     }
-                    if (dataTemplate.Preop_CDVA)
+                    if (DataTemplate.Preop_CDVA)
                     {
-                        if (dataTemplate.Decimal) { workSheet.Range[2, lastColumn].Value = "CDVA Decimal"; lastColumn++; PreopColCount++; }
-                        if (dataTemplate.Snellen) { workSheet.Range[2, lastColumn].Value = "CDVA Snellen"; lastColumn++; PreopColCount++; }
-                        if (dataTemplate.LogMar) { workSheet.Range[2, lastColumn].Value = "CDVA LogMar"; lastColumn++; PreopColCount++; }
+                        if (DataTemplate.Decimal) { workSheet.Range[2, lastColumn].Value = "CDVA Decimal"; lastColumn++; PreopColCount++; }
+                        if (DataTemplate.Snellen) { workSheet.Range[2, lastColumn].Value = "CDVA Snellen"; lastColumn++; PreopColCount++; }
+                        if (DataTemplate.LogMar) { workSheet.Range[2, lastColumn].Value = "CDVA LogMar"; lastColumn++; PreopColCount++; }
                     }
                     if (PreopColCount > 0)
                     {
@@ -117,32 +119,32 @@ namespace LasikVSSmileInHighAstigmat.ViewModels
                         workSheet.Range[2, lastColumn - PreopColCount, 2, lastColumn - 1].BorderAround(LineStyleType.Medium, ExcelColors.Red);
                     }
 
-                    for (int i = 0; i < dataTemplate.ControlMonths.Count; i++)
+                    for (int i = 0; i < DataTemplate.ControlMonths.Count; i++)
                     {
                         int PostopColCount = 0;
-                        if (dataTemplate.Postop_StepK) { workSheet.Range[2, lastColumn].Value = "Corneal Thickness"; lastColumn++; PostopColCount++; }
-                        if (dataTemplate.Postop_StepK) { workSheet.Range[2, lastColumn].Value = "Step K"; lastColumn++; PostopColCount++; }
-                        if (dataTemplate.Postop_StepKAxis) { workSheet.Range[2, lastColumn].Value = "Step K Axis"; lastColumn++; PostopColCount++; }
-                        if (dataTemplate.Postop_FlatK) { workSheet.Range[2, lastColumn].Value = "Flat K"; lastColumn++; PostopColCount++; }
-                        if (dataTemplate.Postop_FlatKAxis) { workSheet.Range[2, lastColumn].Value = "Flat K Axis"; lastColumn++; PostopColCount++; }
-                        if (dataTemplate.Postop_ManifestSphere) { workSheet.Range[2, lastColumn].Value = "Manifest Sphere"; lastColumn++; PostopColCount++; }
-                        if (dataTemplate.Postop_ManifestCylinder) { workSheet.Range[2, lastColumn].Value = "Manifest Cylinder"; lastColumn++; PostopColCount++; }
-                        if (dataTemplate.Postop_ManifestAxis) { workSheet.Range[2, lastColumn].Value = "Manifest Axis"; lastColumn++; PostopColCount++; }
-                        if (dataTemplate.Preop_UDVA)
+                        if (DataTemplate.Postop_StepK) { workSheet.Range[2, lastColumn].Value = "Corneal Thickness"; lastColumn++; PostopColCount++; }
+                        if (DataTemplate.Postop_StepK) { workSheet.Range[2, lastColumn].Value = "Step K"; lastColumn++; PostopColCount++; }
+                        if (DataTemplate.Postop_StepKAxis) { workSheet.Range[2, lastColumn].Value = "Step K Axis"; lastColumn++; PostopColCount++; }
+                        if (DataTemplate.Postop_FlatK) { workSheet.Range[2, lastColumn].Value = "Flat K"; lastColumn++; PostopColCount++; }
+                        if (DataTemplate.Postop_FlatKAxis) { workSheet.Range[2, lastColumn].Value = "Flat K Axis"; lastColumn++; PostopColCount++; }
+                        if (DataTemplate.Postop_ManifestSphere) { workSheet.Range[2, lastColumn].Value = "Manifest Sphere"; lastColumn++; PostopColCount++; }
+                        if (DataTemplate.Postop_ManifestCylinder) { workSheet.Range[2, lastColumn].Value = "Manifest Cylinder"; lastColumn++; PostopColCount++; }
+                        if (DataTemplate.Postop_ManifestAxis) { workSheet.Range[2, lastColumn].Value = "Manifest Axis"; lastColumn++; PostopColCount++; }
+                        if (DataTemplate.Preop_UDVA)
                         {
-                            if (dataTemplate.Decimal) { workSheet.Range[2, lastColumn].Value = "UDVA Decimal"; lastColumn++; PostopColCount++; }
-                            if (dataTemplate.Snellen) { workSheet.Range[2, lastColumn].Value = "UDVA Snellen"; lastColumn++; PostopColCount++; }
-                            if (dataTemplate.LogMar) { workSheet.Range[2, lastColumn].Value = "UDVA LogMar"; lastColumn++; PostopColCount++; }
+                            if (DataTemplate.Decimal) { workSheet.Range[2, lastColumn].Value = "UDVA Decimal"; lastColumn++; PostopColCount++; }
+                            if (DataTemplate.Snellen) { workSheet.Range[2, lastColumn].Value = "UDVA Snellen"; lastColumn++; PostopColCount++; }
+                            if (DataTemplate.LogMar) { workSheet.Range[2, lastColumn].Value = "UDVA LogMar"; lastColumn++; PostopColCount++; }
                         }
-                        if (dataTemplate.Preop_CDVA)
+                        if (DataTemplate.Preop_CDVA)
                         {
-                            if (dataTemplate.Decimal) { workSheet.Range[2, lastColumn].Value = "CDVA Decimal"; lastColumn++; PostopColCount++; }
-                            if (dataTemplate.Snellen) { workSheet.Range[2, lastColumn].Value = "CDVA Snellen"; lastColumn++; PostopColCount++; }
-                            if (dataTemplate.LogMar) { workSheet.Range[2, lastColumn].Value = "CDVA LogMar"; lastColumn++; PostopColCount++; }
+                            if (DataTemplate.Decimal) { workSheet.Range[2, lastColumn].Value = "CDVA Decimal"; lastColumn++; PostopColCount++; }
+                            if (DataTemplate.Snellen) { workSheet.Range[2, lastColumn].Value = "CDVA Snellen"; lastColumn++; PostopColCount++; }
+                            if (DataTemplate.LogMar) { workSheet.Range[2, lastColumn].Value = "CDVA LogMar"; lastColumn++; PostopColCount++; }
                         }
                         if (PostopColCount > 0)
                         {
-                            workSheet.Range[1, lastColumn - PostopColCount].Value = $"Postop Değerler - {dataTemplate.ControlMonths[i].Month}.mo";
+                            workSheet.Range[1, lastColumn - PostopColCount].Value = $"Postop Değerler - {DataTemplate.ControlMonths[i].Month}.mo";
                             workSheet.Range[1, lastColumn - PostopColCount, 1, lastColumn - 1].Merge();
                             workSheet.Range[1, lastColumn - PostopColCount, 1, lastColumn - 1].VerticalAlignment = VerticalAlignType.Center;
                             workSheet.Range[1, lastColumn - PostopColCount, 1, lastColumn - 1].BorderAround(LineStyleType.Medium, ExcelColors.Red);
@@ -164,10 +166,10 @@ namespace LasikVSSmileInHighAstigmat.ViewModels
                     workSheet.Range[1, 1, 2, lastColumn].Style.Locked = true;
                     workSheet.Protect("1634", SheetProtectionType.All);
 
-                    for (int i = 1; i < dataTemplate.GroupNames.Count; i++)
+                    for (int i = 1; i < DataTemplate.GroupNames.Count; i++)
                     {
                         workBook.Worksheets.AddCopy(0);
-                        workBook.Worksheets[^1].Name = dataTemplate.GroupNames[i].Name;
+                        workBook.Worksheets[^1].Name = DataTemplate.GroupNames[i].Name;
                         workBook.Worksheets[^1].Protect("1634", SheetProtectionType.All);
                     }
 
@@ -183,7 +185,7 @@ namespace LasikVSSmileInHighAstigmat.ViewModels
 
         public CreateTemplateViewModel()
         {
-            dataTemplate = new()
+            DataTemplate = new()
             {
                 ControlMonths = new()
             };

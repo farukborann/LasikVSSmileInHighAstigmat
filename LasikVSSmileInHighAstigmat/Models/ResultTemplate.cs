@@ -619,11 +619,13 @@ namespace LasikVSSmileInHighAstigmat.Models
 
         public void Export()
         {
-            OpenFileDialog file = new();
-            file.ValidateNames = false;
-            file.CheckFileExists = false;
-            file.CheckPathExists = true;
-            file.FileName = "Klasör Seçin";
+            OpenFileDialog file = new()
+            {
+                ValidateNames = false,
+                CheckFileExists = false,
+                CheckPathExists = true,
+                FileName = "Klasör Seçin"
+            };
 
             if (file.ShowDialog() == true)
             {

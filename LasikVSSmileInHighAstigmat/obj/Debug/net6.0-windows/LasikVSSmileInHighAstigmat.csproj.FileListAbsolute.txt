@@ -34,3 +34,77 @@ C:\Users\Boran\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAs
 C:\Users\Boran\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\Spire.License.dll
 C:\Users\Boran\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\Spire.Pdf.dll
 C:\Users\Boran\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\Spire.XLS.dll
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.dll
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\refint\LasikVSSmileInHighAstigmat.dll
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.pdb
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.exe
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.deps.json
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.runtimeconfig.json
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.dll
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.pdb
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\ControlzEx.dll
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\Spire.License.dll
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\Spire.Pdf.dll
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\Spire.XLS.dll
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\MahApps.Metro.dll
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\Microsoft.Xaml.Behaviors.dll
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\de\MahApps.Metro.resources.dll
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.csproj.AssemblyReference.cache
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\CreateTemplate.g.cs
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\Details.g.cs
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\App.g.cs
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat_Content.g.cs
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat_MarkupCompile.cache
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat_MarkupCompile.lref
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\App.baml
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\CreateTemplate.baml
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\Details.baml
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\MainWindow.baml
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.g.resources
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.AssemblyInfoInputs.cache
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.AssemblyInfo.cs
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.csproj.CoreCompileInputs.cache
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.csproj.CopyComplete
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.genruntimeconfig.cache
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\ref\LasikVSSmileInHighAstigmat.dll
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\OpenFile.g.cs
+C:\Users\Ömer Faruk BORAN\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\OpenFile.baml
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.csproj.AssemblyReference.cache
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\App.g.cs
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat_Content.g.cs
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat_MarkupCompile.cache
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat_MarkupCompile.lref
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.dll
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.pdb
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.exe
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.deps.json
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.runtimeconfig.json
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.dll
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.pdb
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\ControlzEx.dll
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\Spire.License.dll
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\Spire.Pdf.dll
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\Spire.XLS.dll
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\MahApps.Metro.dll
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\Microsoft.Xaml.Behaviors.dll
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\bin\Debug\net6.0-windows\de\MahApps.Metro.resources.dll
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\CreateTemplate.g.cs
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\App.baml
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\MainWindow.baml
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\CreateTemplate.baml
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.g.resources
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.AssemblyInfoInputs.cache
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.AssemblyInfo.cs
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.csproj.CoreCompileInputs.cache
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.csproj.CopyComplete
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\refint\LasikVSSmileInHighAstigmat.dll
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\LasikVSSmileInHighAstigmat.genruntimeconfig.cache
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\ref\LasikVSSmileInHighAstigmat.dll
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\OpenFileWindow.g.cs
+C:\Users\kapsul.konya\Desktop\Workspace\LasikVSSmileInHighAstigmat\LasikVSSmileInHighAstigmat\obj\Debug\net6.0-windows\OpenFileWindow.baml

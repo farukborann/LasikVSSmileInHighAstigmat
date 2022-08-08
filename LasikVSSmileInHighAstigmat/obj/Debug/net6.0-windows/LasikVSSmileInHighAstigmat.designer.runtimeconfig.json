@@ -12,8 +12,8 @@
       }
     ],
     "additionalProbingPaths": [
-      "C:\\Users\\Boran\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\Boran\\.nuget\\packages"
+      "C:\\Users\\kapsul.konya\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\kapsul.konya\\.nuget\\packages"
     ],
     "configProperties": {
       "Microsoft.NETCore.DotNetHostPolicy.SetAppPaths": true

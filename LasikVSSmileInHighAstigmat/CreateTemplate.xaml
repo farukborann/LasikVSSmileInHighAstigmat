@@ -26,7 +26,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <ListView Grid.Row="1" x:Name="groupsListBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding dataTemplate.GroupNames}">
+            <ListView Grid.Row="1" x:Name="groupsListBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding DataTemplate.GroupNames}">
                 <ListView.View>
                     <GridView ColumnHeaderToolTip="Authors">
                         <GridViewColumn Header="" Width="200" >
@@ -79,34 +79,34 @@
 
                     <StackPanel>
                         <TextBlock Text="Preop" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                        <CheckBox Content="Group" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Group}"/>
-                        <CheckBox Content="Side" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Side}"/>
-                        <CheckBox Content="Name Surname" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Name_Surname}"/>
-                        <CheckBox Content="Op. Date" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.OpDate}"/>
-                        <CheckBox Content="Sex" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Sex}" />
-                        <CheckBox Content="Age" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Age}" />
-                        <CheckBox Content="Intended Sphere" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.IntendedSphere}" />
-                        <CheckBox Content="Intended Cylinder" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.IntendedCylinder}" />
-                        <CheckBox Content="Intended Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.IntendedAxis}" />
-                        <CheckBox Content="Target Sphere" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.TargetSphere}" />
-                        <CheckBox Content="Target Cylinder" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.TargetCylinder}" />
-                        <CheckBox Content="Target Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.TargetAxis}" />
-                        <CheckBox Content="Incision Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.IncisionAxis}" />
-                        <CheckBox Content="Incision Size" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.IncisionSize}" />
+                        <CheckBox Content="Group" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Group}"/>
+                        <CheckBox Content="Side" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Side}"/>
+                        <CheckBox Content="Name Surname" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Name_Surname}"/>
+                        <CheckBox Content="Op. Date" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.OpDate}"/>
+                        <CheckBox Content="Sex" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Sex}" />
+                        <CheckBox Content="Age" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Age}" />
+                        <CheckBox Content="Intended Sphere" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.IntendedSphere}" />
+                        <CheckBox Content="Intended Cylinder" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.IntendedCylinder}" />
+                        <CheckBox Content="Intended Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.IntendedAxis}" />
+                        <CheckBox Content="Target Sphere" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.TargetSphere}" />
+                        <CheckBox Content="Target Cylinder" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.TargetCylinder}" />
+                        <CheckBox Content="Target Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.TargetAxis}" />
+                        <CheckBox Content="Incision Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.IncisionAxis}" />
+                        <CheckBox Content="Incision Size" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.IncisionSize}" />
                     </StackPanel>
 
                     <StackPanel Grid.Column="1">
                         <TextBlock Text="" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                        <CheckBox Content="Preop Corneal Thickness" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Preop_CornealThickness}" />
-                        <CheckBox Content="Preop Step K" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Preop_StepK}" />
-                        <CheckBox Content="Preop Step K Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Preop_StepKAxis}" />
-                        <CheckBox Content="Preop Flat K" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Preop_FlatK}" />
-                        <CheckBox Content="Preop Flat K Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Preop_FlatKAxis}" />
-                        <CheckBox Content="Preop Manifest Sphere" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Preop_ManifestSphere}" />
-                        <CheckBox Content="Preop Manifest Cylinder" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Preop_ManifestCylinder}" />
-                        <CheckBox Content="Preop Manifest Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Preop_ManifestAxis}" />
-                        <CheckBox Content="Preop UDVA" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Preop_UDVA}" />
-                        <CheckBox Content="Preop CDVA" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Preop_CDVA}" />
+                        <CheckBox Content="Preop Corneal Thickness" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Preop_CornealThickness}" />
+                        <CheckBox Content="Preop Step K" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Preop_StepK}" />
+                        <CheckBox Content="Preop Step K Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Preop_StepKAxis}" />
+                        <CheckBox Content="Preop Flat K" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Preop_FlatK}" />
+                        <CheckBox Content="Preop Flat K Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Preop_FlatKAxis}" />
+                        <CheckBox Content="Preop Manifest Sphere" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Preop_ManifestSphere}" />
+                        <CheckBox Content="Preop Manifest Cylinder" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Preop_ManifestCylinder}" />
+                        <CheckBox Content="Preop Manifest Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Preop_ManifestAxis}" />
+                        <CheckBox Content="Preop UDVA" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Preop_UDVA}" />
+                        <CheckBox Content="Preop CDVA" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Preop_CDVA}" />
                     </StackPanel>
                 </Grid>
 
@@ -119,23 +119,23 @@
 
                     <StackPanel Margin="15,0,0,0">
                         <TextBlock Text="Postop" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                        <CheckBox Content="Postop Corneal Thickness" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Postop_CornealThickness}" />
-                        <CheckBox Content="Postop Step K" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Postop_StepK}" />
-                        <CheckBox Content="Postop Step K Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Postop_StepKAxis}" />
-                        <CheckBox Content="Postop Flat K" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Postop_FlatK}" />
-                        <CheckBox Content="Postop Flat K Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Postop_FlatKAxis}" />
-                        <CheckBox Content="Postop Manifest Sphere" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Postop_ManifestSphere}" />
-                        <CheckBox Content="Postop Manifest Cylinder" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Postop_ManifestCylinder}" />
-                        <CheckBox Content="Postop Manifest Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Postop_ManifestAxis}" />
-                        <CheckBox Content="Postop UDVA" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Postop_UDVA}" />
-                        <CheckBox Content="Postop CDVA" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Postop_CDVA}" />
+                        <CheckBox Content="Postop Corneal Thickness" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Postop_CornealThickness}" />
+                        <CheckBox Content="Postop Step K" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Postop_StepK}" />
+                        <CheckBox Content="Postop Step K Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Postop_StepKAxis}" />
+                        <CheckBox Content="Postop Flat K" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Postop_FlatK}" />
+                        <CheckBox Content="Postop Flat K Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Postop_FlatKAxis}" />
+                        <CheckBox Content="Postop Manifest Sphere" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Postop_ManifestSphere}" />
+                        <CheckBox Content="Postop Manifest Cylinder" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Postop_ManifestCylinder}" />
+                        <CheckBox Content="Postop Manifest Axis" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Postop_ManifestAxis}" />
+                        <CheckBox Content="Postop UDVA" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Postop_UDVA}" />
+                        <CheckBox Content="Postop CDVA" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Postop_CDVA}" />
                     </StackPanel>
 
                     <StackPanel Grid.Row="1" Margin="15,0,0,0">
                         <TextBlock Text="Visual Acuity Type" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                        <RadioButton Content="Decimal" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Decimal}"/>
-                        <RadioButton Content="Snellen" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.Snellen}"/>
-                        <RadioButton Content="LogMar" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding dataTemplate.LogMar}"/>
+                        <RadioButton Content="Decimal" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Decimal}"/>
+                        <RadioButton Content="Snellen" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.Snellen}"/>
+                        <RadioButton Content="LogMar" Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="{Binding DataTemplate.LogMar}"/>
                     </StackPanel>
                 </Grid>
             </Grid>
@@ -149,7 +149,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <ListView Grid.Row="1" x:Name="periotsListBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,-15,5,5" ItemsSource="{Binding dataTemplate.ControlMonths}">
+            <ListView Grid.Row="1" x:Name="periotsListBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,0,5,5" ItemsSource="{Binding DataTemplate.ControlMonths}">
                 <ListView.View>
                     <GridView ColumnHeaderToolTip="Authors">
                         <GridViewColumn Header="" Width="200" >

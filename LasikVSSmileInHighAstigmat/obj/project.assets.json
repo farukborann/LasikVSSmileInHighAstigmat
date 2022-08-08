@@ -620,19 +620,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Boran\\.nuget\\packages\\": {}
+    "C:\\Users\\kapsul.konya\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Boran\\Desktop\\Workspace\\LasikVSSmileInHighAstigmat\\LasikVSSmileInHighAstigmat\\LasikVSSmileInHighAstigmat.csproj",
+      "projectUniqueName": "C:\\Users\\kapsul.konya\\Desktop\\Workspace\\LasikVSSmileInHighAstigmat\\LasikVSSmileInHighAstigmat\\LasikVSSmileInHighAstigmat.csproj",
       "projectName": "LasikVSSmileInHighAstigmat",
-      "projectPath": "C:\\Users\\Boran\\Desktop\\Workspace\\LasikVSSmileInHighAstigmat\\LasikVSSmileInHighAstigmat\\LasikVSSmileInHighAstigmat.csproj",
-      "packagesPath": "C:\\Users\\Boran\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Boran\\Desktop\\Workspace\\LasikVSSmileInHighAstigmat\\LasikVSSmileInHighAstigmat\\obj\\",
+      "projectPath": "C:\\Users\\kapsul.konya\\Desktop\\Workspace\\LasikVSSmileInHighAstigmat\\LasikVSSmileInHighAstigmat\\LasikVSSmileInHighAstigmat.csproj",
+      "packagesPath": "C:\\Users\\kapsul.konya\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\kapsul.konya\\Desktop\\Workspace\\LasikVSSmileInHighAstigmat\\LasikVSSmileInHighAstigmat\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Boran\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\kapsul.konya\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -685,7 +685,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }
